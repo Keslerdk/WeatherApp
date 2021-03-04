@@ -15,6 +15,6 @@ public interface CurrentWeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void upsert(CurrentWeather currentWeather);
 
-    @Query("select * from current_weather where id = CURRENT_WEATHER_ID")
+    @Query("select * from current_weather where id = 0")
     LiveData<CurrentWeather> getCurrentWeather();
 }

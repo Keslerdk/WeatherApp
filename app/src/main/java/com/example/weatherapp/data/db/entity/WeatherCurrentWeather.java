@@ -1,15 +1,14 @@
 package com.example.weatherapp.data.db.entity;
 
 public class WeatherCurrentWeather {
-    int id;
-    String main;
-    String description;
-    String icon;
+    public int id;
+    public String main;
+    public String description;
+    public String icon;
 
     public int getId() {
         return id;
     }
-
     public String getMain() {
         return main;
     }

@@ -1,5 +1,9 @@
 package com.example.weatherapp.data.network;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 
 import java.io.IOException;
@@ -60,5 +64,13 @@ public interface WeatherApiRequest {
                 .build()
                 .create(WeatherApiRequest.class);
         return builder;
+    }
+
+    static Boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiCon = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobCon = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        return (wifiCon!=null && wifiCon.isConnected() || mobCon!=null && mobCon.isConnected());
     }
 }

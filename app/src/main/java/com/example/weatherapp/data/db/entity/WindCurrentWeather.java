@@ -1,8 +1,9 @@
 package com.example.weatherapp.data.db.entity;
 
+
 public class WindCurrentWeather {
-    int speed;
-    int deg;
+    public int speed;
+    public int deg;
 
     public int getSpeed() {
         return speed;

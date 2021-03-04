@@ -1,9 +1,9 @@
 package com.example.weatherapp.data.db.entity;
 
 public class MainCurrentWeather {
-    int temp;
-    int feels_like;
-    int humidity;
+    public int temp;
+    public int feels_like;
+    public int humidity;
 
     public int getTemp() {
         return temp;
