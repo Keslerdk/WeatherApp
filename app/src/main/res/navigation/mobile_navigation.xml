@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/searchWeatherFragment">
+
+    <fragment
+        android:id="@+id/searchWeatherFragment"
+        android:name="com.example.weatherapp.ui.setting.search.SearchWeatherFragment"
+        android:label="Поиск"
+        tools:layout="@layout/search_weather_fragment" />
+    <fragment
+        android:id="@+id/currentWeatherFragment"
+        android:name="com.example.weatherapp.ui.weather.current.CurrentWeatherFragment"
+        android:label="Сейчас"
+        tools:layout="@layout/current_weather_fragment" />
+    <fragment
+        android:id="@+id/forecast7DaysFragment"
+        android:name="com.example.weatherapp.ui.weather.future.Forecast7DaysFragment"
+        android:label="Прогноз на 7 дней"
+        tools:layout="@layout/forecast7_days_fragment" />
+    <fragment
+        android:id="@+id/favouriteWeatherFragment"
+        android:name="com.example.weatherapp.ui.setting.favourite.FavouriteWeatherFragment"
+        android:label="Избранные"
+        tools:layout="@layout/favourite_weather_fragment" />
+</navigation>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/searchWeatherFragment"
+        android:icon="@drawable/ic_search"
+        android:title="Поиск"/>
+
+    <item
+        android:id="@+id/currentWeatherFragment"
+        android:icon="@drawable/ic_current"
+        android:title="Сейчас"/>
+
+    <item
+        android:id="@+id/forecast7DaysFragment"
+        android:icon="@drawable/ic_7days"
+        android:title="Прогноз"/>
+
+    <item
+        android:id="@+id/favouriteWeatherFragment"
+        android:icon="@drawable/ic_favourite"
+        android:title="Избранные"/>
+</menu>
