@@ -1,5 +1,7 @@
 package com.example.weatherapp.ui.weather.current;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +18,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.data.db.entity.CurrentWeather;
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 import com.example.weatherapp.data.network.WeatherApiRequest;
+import com.example.weatherapp.ui.MainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,8 +44,18 @@ public class CurrentWeatherFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CurrentWeatherViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(CurrentWeatherViewModel.class);
         // TODO: Use the ViewModel
+
+        mViewModel.getCurrentWeather().observe(getViewLifecycleOwner() , new Observer<CurrentWeather>() {
+            @Override
+            public void onChanged(CurrentWeather currentWeather) {
+                Toast.makeText(getContext(), currentWeather.name, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "onChanged", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         WeatherApiRequest jsonPlaceHolderApi = WeatherApiRequest.invoke();
         Call<CurrentWeatherResponse> call = jsonPlaceHolderApi.getCurrentWeather("London");
         if (WeatherApiRequest.isOnline(this.getContext())) {

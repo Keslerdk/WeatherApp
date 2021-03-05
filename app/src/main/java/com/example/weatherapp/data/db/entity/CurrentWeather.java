@@ -22,6 +22,14 @@ public class CurrentWeather {
     @PrimaryKey(autoGenerate = false)
     public int id = CURRENT_WEATHER_ID;
 
+    public CurrentWeather(WeatherCurrentWeather weather, MainCurrentWeather main, WindCurrentWeather wind, CloudsCurrentWeather clouds, String name) {
+        this.weather = weather;
+        this.main = main;
+        this.wind = wind;
+        this.clouds = clouds;
+        this.name = name;
+    }
+
     public WeatherCurrentWeather getWeather() {
         return weather;
     }

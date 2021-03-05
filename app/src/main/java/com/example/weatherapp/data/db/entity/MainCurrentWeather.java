@@ -5,6 +5,12 @@ public class MainCurrentWeather {
     public int feels_like;
     public int humidity;
 
+    public MainCurrentWeather(int temp, int feels_like, int humidity) {
+        this.temp = temp;
+        this.feels_like = feels_like;
+        this.humidity = humidity;
+    }
+
     public int getTemp() {
         return temp;
     }
