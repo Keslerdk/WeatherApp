@@ -1,25 +1,25 @@
 package com.example.weatherapp.data.db.entity;
 
 public class MainCurrentWeather {
-    public int temp;
-    public int feels_like;
-    public int humidity;
+    public float temp;
+    public float feels_like;
+    public float humidity;
 
-    public MainCurrentWeather(int temp, int feels_like, int humidity) {
+    public MainCurrentWeather(float temp, float feels_like, float humidity) {
         this.temp = temp;
         this.feels_like = feels_like;
         this.humidity = humidity;
     }
 
-    public int getTemp() {
+    public float getTemp() {
         return temp;
     }
 
-    public int getFeels_like() {
+    public float getFeels_like() {
         return feels_like;
     }
 
-    public int getHumidity() {
+    public float getHumidity() {
         return humidity;
     }
 }

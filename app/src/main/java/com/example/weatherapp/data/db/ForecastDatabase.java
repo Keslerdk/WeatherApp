@@ -21,7 +21,7 @@ import com.example.weatherapp.data.db.entity.WindCurrentWeather;
 import kotlin.jvm.Volatile;
 
 @Database(entities = {CurrentWeather.class},
-        version = 1
+        version = 3
 )
 public abstract class ForecastDatabase extends RoomDatabase {
 

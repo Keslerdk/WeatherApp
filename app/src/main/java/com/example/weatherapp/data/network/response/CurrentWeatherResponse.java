@@ -1,18 +1,18 @@
 package com.example.weatherapp.data.network.response;
 
 
-import androidx.room.Entity;
-
 import com.example.weatherapp.data.db.entity.CloudsCurrentWeather;
 import com.example.weatherapp.data.db.entity.CoordCurrentWeather;
 import com.example.weatherapp.data.db.entity.MainCurrentWeather;
 import com.example.weatherapp.data.db.entity.WeatherCurrentWeather;
 import com.example.weatherapp.data.db.entity.WindCurrentWeather;
 
+import java.util.List;
+
 public class CurrentWeatherResponse {
 
     CoordCurrentWeather coord;
-    WeatherCurrentWeather weather;
+    List<WeatherCurrentWeather> weather;
     MainCurrentWeather main;
     WindCurrentWeather wind;
     CloudsCurrentWeather clouds;
@@ -25,7 +25,7 @@ public class CurrentWeatherResponse {
         return coord;
     }
 
-    public WeatherCurrentWeather getWeather() {
+    public List<WeatherCurrentWeather> getWeather() {
         return weather;
     }
 

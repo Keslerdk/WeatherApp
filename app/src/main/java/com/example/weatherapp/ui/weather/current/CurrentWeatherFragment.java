@@ -18,7 +18,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.data.db.entity.CloudsCurrentWeather;
 import com.example.weatherapp.data.db.entity.CurrentWeather;
+import com.example.weatherapp.data.db.entity.MainCurrentWeather;
+import com.example.weatherapp.data.db.entity.WeatherCurrentWeather;
+import com.example.weatherapp.data.db.entity.WindCurrentWeather;
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 import com.example.weatherapp.data.network.WeatherApiRequest;
 import com.example.weatherapp.ui.MainActivity;
@@ -48,11 +52,14 @@ public class CurrentWeatherFragment extends Fragment {
 //        mViewModel = new ViewModelProvider(this).get(CurrentWeatherViewModel.class);
         // TODO: Use the ViewModel
 
+        mViewModel.upsert(new CurrentWeather(new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
+                new MainCurrentWeather(1, 2, 3),
+                new WindCurrentWeather(1, 2),
+                new CloudsCurrentWeather(1), "Check"));
         mViewModel.getCurrentWeather().observe(getViewLifecycleOwner() , new Observer<CurrentWeather>() {
             @Override
             public void onChanged(CurrentWeather currentWeather) {
                 Toast.makeText(getContext(), currentWeather.name, Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getContext(), "onChanged", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -62,11 +69,15 @@ public class CurrentWeatherFragment extends Fragment {
             call.enqueue(new Callback<CurrentWeatherResponse>() {
                 @Override
                 public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
+                    CurrentWeatherResponse val = response.body();
+                    mViewModel.upsert(new CurrentWeather(val.getWeather().get(0), val.getMain(),
+                            val.getWind(), val.getClouds(), val.getName()));
+                    Log.d("InResponse", String.valueOf(val.getName()));
                 }
 
                 @Override
                 public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
-
+                    Log.e("InResponse", "exeption", t);
                 }
             });
         } else {

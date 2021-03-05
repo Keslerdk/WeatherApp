@@ -1,14 +1,14 @@
 package com.example.weatherapp.data.db.entity;
 
 public class CoordCurrentWeather {
-    int lon;
-    int lat;
+    float lon;
+    float lat;
 
-    public int getLon() {
+    public float getLon() {
         return lon;
     }
 
-    public int getLat() {
+    public float getLat() {
         return lat;
     }
 }

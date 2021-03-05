@@ -1,13 +1,13 @@
 package com.example.weatherapp.data.db.entity;
 
 public class CloudsCurrentWeather {
-    public int all;
+    public float all;
 
-    public CloudsCurrentWeather(int all) {
+    public CloudsCurrentWeather(float all) {
         this.all = all;
     }
 
-    public int getAll() {
+    public float getAll() {
         return all;
     }
 }
