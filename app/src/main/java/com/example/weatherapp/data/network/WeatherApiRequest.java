@@ -25,12 +25,14 @@ public interface WeatherApiRequest {
     String API_KEY = "7cfe7099ba8e9a69dfc020e15e9cfff9";
 
     //    api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+    //запрос на текущую погоду
     @GET("weather")
     Call<CurrentWeatherResponse> getCurrentWeather(
             @Query("q") String city
     );
 
     //    onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+    //запрос на прогноз
     @GET("onecall")
     Call<Forecast7DaysResponse> get7DaysForecast(
             @Query("lat") float lat,
@@ -39,6 +41,7 @@ public interface WeatherApiRequest {
     );
 
 
+    //ретрофит
     static WeatherApiRequest invoke() {
         Interceptor requestInterceptor = new Interceptor() {
             @Override
@@ -75,6 +78,7 @@ public interface WeatherApiRequest {
         return builder;
     }
 
+    //проверка подключения
     static Boolean isOnline(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);

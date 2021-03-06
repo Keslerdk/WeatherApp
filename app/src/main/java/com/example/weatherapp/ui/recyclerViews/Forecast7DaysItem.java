@@ -1,5 +1,7 @@
-package com.example.weatherapp.ui;
+package com.example.weatherapp.ui.recyclerViews;
 
+
+//обработка полей в карточке forecast7days
 public class Forecast7DaysItem {
     int imageIcon;
     String temp;

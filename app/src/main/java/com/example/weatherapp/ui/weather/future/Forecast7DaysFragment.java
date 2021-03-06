@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.weatherapp.R;
-import com.example.weatherapp.ui.Forecast7DaysItem;
-import com.example.weatherapp.ui.adapters.ForecastRecyclerAdapter;
+import com.example.weatherapp.ui.recyclerViews.Forecast7DaysItem;
+import com.example.weatherapp.ui.recyclerViews.ForecastRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +25,12 @@ public class Forecast7DaysFragment extends Fragment {
 
     private Forecast7DaysViewModel mViewModel;
 
+    //обработка ресайклер вью
     private RecyclerView forecastRecyclerView;
     private RecyclerView.Adapter forecastAdapter;
     private RecyclerView.LayoutManager forecastLayoutManager;
+
+    //список с карточками
     ArrayList<Forecast7DaysItem> exampleList = new ArrayList<>();
 
     public static Forecast7DaysFragment newInstance() {
@@ -38,11 +41,10 @@ public class Forecast7DaysFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        
-        creatRecyclerView();
-//
         View view = inflater.inflate(R.layout.forecast7_days_fragment, container, false);
 
+        //создание и зполнение ресайклер вью
+        creatRecyclerView();
         buildrecyclerView(view);
 
         return view;

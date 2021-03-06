@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.adapters;
+package com.example.weatherapp.ui.recyclerViews;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.R;
-import com.example.weatherapp.ui.Forecast7DaysItem;
 
 import java.util.ArrayList;
 
