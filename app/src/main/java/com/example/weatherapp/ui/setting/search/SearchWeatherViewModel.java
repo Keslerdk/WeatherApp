@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.weatherapp.data.db.ForecastRepo;
-import com.example.weatherapp.data.db.entity.CurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 
 public class SearchWeatherViewModel extends AndroidViewModel {
     // TODO: Implement the ViewModel

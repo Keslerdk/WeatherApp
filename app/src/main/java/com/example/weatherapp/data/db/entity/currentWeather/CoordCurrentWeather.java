@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.db.entity;
+package com.example.weatherapp.data.db.entity.currentWeather;
 
 public class CoordCurrentWeather {
     float lon;

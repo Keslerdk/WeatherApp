@@ -1,11 +1,11 @@
 package com.example.weatherapp.data.network.response;
 
 
-import com.example.weatherapp.data.db.entity.CloudsCurrentWeather;
-import com.example.weatherapp.data.db.entity.CoordCurrentWeather;
-import com.example.weatherapp.data.db.entity.MainCurrentWeather;
-import com.example.weatherapp.data.db.entity.WeatherCurrentWeather;
-import com.example.weatherapp.data.db.entity.WindCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CloudsCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CoordCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.MainCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.WeatherCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.WindCurrentWeather;
 
 import java.util.List;
 

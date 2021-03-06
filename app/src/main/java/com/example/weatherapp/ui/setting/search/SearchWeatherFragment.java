@@ -1,7 +1,6 @@
 package com.example.weatherapp.ui.setting.search;
 
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
@@ -18,11 +17,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.db.entity.CurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.network.WeatherApiRequest;
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 import com.example.weatherapp.data.network.response.Forecast7DaysResponse;
-import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
@@ -71,7 +69,6 @@ public class SearchWeatherFragment extends Fragment {
                 lat = currentWeather.coordCurrentWeather.getLat();
                 lon = currentWeather.coordCurrentWeather.getLon();
                 Log.d("CurrentWeatherCoord", String.valueOf(lat)+111);
-//                Toast.makeText(getContext(), (int) (lat), Toast.LENGTH_SHORT).show();
             }
         });
         // TODO: Use the ViewModel

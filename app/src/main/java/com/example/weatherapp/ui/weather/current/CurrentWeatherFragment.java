@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.db.entity.CurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 
 public class CurrentWeatherFragment extends Fragment {
 

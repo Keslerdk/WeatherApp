@@ -1,13 +1,11 @@
-package com.example.weatherapp.data.db;
+package com.example.weatherapp.data.db.dao;
 
-import com.example.weatherapp.data.db.entity.CurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-
-import com.example.weatherapp.data.db.entity.CurrentWeather;
 
 @Dao
 public interface CurrentWeatherDao {

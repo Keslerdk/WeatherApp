@@ -5,13 +5,10 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.weatherapp.data.db.ForecastRepo;
-import com.example.weatherapp.data.db.entity.CurrentWeather;
-;import java.util.Objects;
-
-import static java.util.Objects.*;
+import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
+;
 
 public class CurrentWeatherViewModel extends AndroidViewModel {
     // TODO: Implement the ViewModel

@@ -4,29 +4,33 @@ package com.example.weatherapp.data.db;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
-import androidx.room.Dao;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.weatherapp.data.db.entity.CloudsCurrentWeather;
-import com.example.weatherapp.data.db.entity.CoordCurrentWeather;
-import com.example.weatherapp.data.db.entity.CurrentWeather;
-import com.example.weatherapp.data.db.entity.MainCurrentWeather;
-import com.example.weatherapp.data.db.entity.WeatherCurrentWeather;
-import com.example.weatherapp.data.db.entity.WindCurrentWeather;
+import com.example.weatherapp.data.db.dao.CurrentWeatherDao;
+import com.example.weatherapp.data.db.dao.Forecast7DaysDao;
+import com.example.weatherapp.data.db.entity.currentWeather.CloudsCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CoordCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.MainCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.WeatherCurrentWeather;
+import com.example.weatherapp.data.db.entity.currentWeather.WindCurrentWeather;
+import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
+import com.example.weatherapp.data.db.entity.forecast7Days.ForecastDaily;
+import com.example.weatherapp.data.db.entity.forecast7Days.ForecastDailyConverter;
 
-import kotlin.jvm.Volatile;
-
-@Database(entities = {CurrentWeather.class},
-        version = 4
+@Database(entities = {CurrentWeather.class, Forecast7Days.class},
+        version = 6
 )
+@TypeConverters(ForecastDailyConverter.class)
 public abstract class ForecastDatabase extends RoomDatabase {
 
     public abstract CurrentWeatherDao currentWeatherDao();
+    public abstract Forecast7DaysDao forecast7DaysDao();
 
     public static ForecastDatabase instance;
 
@@ -70,9 +74,11 @@ public abstract class ForecastDatabase extends RoomDatabase {
     private static class PopulatedbAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private CurrentWeatherDao currentWeatherDao;
+        private Forecast7DaysDao forecast7DaysDao;
 
         public PopulatedbAsyncTask(ForecastDatabase db) {
             currentWeatherDao = db.currentWeatherDao();
+            forecast7DaysDao = db.forecast7DaysDao();
         }
 
         @Override
