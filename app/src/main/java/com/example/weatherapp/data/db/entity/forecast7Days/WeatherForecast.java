@@ -3,13 +3,13 @@ package com.example.weatherapp.data.db.entity.forecast7Days;
 public class WeatherForecast {
     public int id;
     public String main;
-    public String descroption;
+    public String description;
     public String icon;
 
     public WeatherForecast(int id, String main, String descroption, String icon) {
         this.id = id;
         this.main = main;
-        this.descroption = descroption;
+        this.description = descroption;
         this.icon = icon;
     }
 
@@ -22,7 +22,7 @@ public class WeatherForecast {
     }
 
     public String getDescroption() {
-        return descroption;
+        return description;
     }
 
     public String getIcon() {

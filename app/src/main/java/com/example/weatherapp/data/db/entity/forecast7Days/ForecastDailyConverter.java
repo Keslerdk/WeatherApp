@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.db.entity.forecast7Days;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.room.TypeConverter;

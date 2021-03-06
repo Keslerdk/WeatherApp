@@ -6,9 +6,9 @@ import java.util.List;
 
 public class ForecastDaily {
     @Embedded(prefix = "tempForecast")
-    public TempForecast tempForecast;
+    public TempForecast temp;
     @Embedded(prefix = "feelLikeForecast")
-    public FeelsLikeForecast feelsLikeForecast;
+    public FeelsLikeForecast feels_like;
     public float humidity;
     public float wind_speed;
     public float wind_deg;
@@ -19,8 +19,8 @@ public class ForecastDaily {
     public ForecastDaily(TempForecast tempForecast, FeelsLikeForecast feelsLikeForecast,
                          float humidity, float wind_speed, float wind_deg,
                          WeatherForecast weatherForecast, float clouds) {
-        this.tempForecast = tempForecast;
-        this.feelsLikeForecast = feelsLikeForecast;
+        this.temp = tempForecast;
+        this.feels_like = feelsLikeForecast;
         this.humidity = humidity;
         this.wind_speed = wind_speed;
         this.wind_deg = wind_deg;
@@ -29,11 +29,11 @@ public class ForecastDaily {
     }
 
     public TempForecast getTempForecast() {
-        return tempForecast;
+        return temp;
     }
 
     public FeelsLikeForecast getFeelsLikeForecast() {
-        return feelsLikeForecast;
+        return feels_like;
     }
 
     public float getHumidity() {

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
+import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.data.network.WeatherApiRequest;
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 import com.example.weatherapp.data.network.response.Forecast7DaysResponse;
@@ -71,6 +72,8 @@ public class SearchWeatherFragment extends Fragment {
                 Log.d("CurrentWeatherCoord", String.valueOf(lat)+111);
             }
         });
+
+
         // TODO: Use the ViewModel
         //при нажатии на кнопку отправлять 2 запроса
         //на текущую погоду и на прогноз
@@ -84,7 +87,7 @@ public class SearchWeatherFragment extends Fragment {
                 WeatherApiRequest jsonPlaceHolderApi = WeatherApiRequest.invoke();
 
                 Call<CurrentWeatherResponse> callCurrentWeather = jsonPlaceHolderApi.getCurrentWeather(cityName);
-                Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "daily");
+                Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly");
 
                 //если есть подключение к интернету отправляем запросы
                 if (WeatherApiRequest.isOnline(getContext())) {
@@ -99,7 +102,6 @@ public class SearchWeatherFragment extends Fragment {
                             //обновляем базу
                             mViewModel.upsert(new CurrentWeather(val.getCoord(), val.getWeather().get(0), val.getMain(),
                                     val.getWind(), val.getClouds(), val.getName()));
-                            Log.d("InResponse", String.valueOf(val.getName()));
                         }
 
                         @Override
@@ -114,8 +116,10 @@ public class SearchWeatherFragment extends Fragment {
                     callForecast.enqueue(new Callback<Forecast7DaysResponse>() {
                         @Override
                         public void onResponse(Call<Forecast7DaysResponse> call, Response<Forecast7DaysResponse> response) {
+                            //обновляем в базу
+                            Forecast7DaysResponse val = response.body();
+                            mViewModel.upsert(new Forecast7Days(val.getDaily()));
 
-                            //TODO: добавить данные в базу
                         }
 
                         @Override
@@ -134,6 +138,7 @@ public class SearchWeatherFragment extends Fragment {
                 }
             }
         });
+
     }
 
 }
