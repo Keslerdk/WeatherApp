@@ -52,10 +52,10 @@ public class CurrentWeatherFragment extends Fragment {
 //        mViewModel = new ViewModelProvider(this).get(CurrentWeatherViewModel.class);
         // TODO: Use the ViewModel
 
-        mViewModel.upsert(new CurrentWeather(new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
-                new MainCurrentWeather(1, 2, 3),
-                new WindCurrentWeather(1, 2),
-                new CloudsCurrentWeather(1), "Check"));
+//        mViewModel.upsert(new CurrentWeather(new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
+//                new MainCurrentWeather(1, 2, 3),
+//                new WindCurrentWeather(1, 2),
+//                new CloudsCurrentWeather(1), "Check"));
         mViewModel.getCurrentWeather().observe(getViewLifecycleOwner() , new Observer<CurrentWeather>() {
             @Override
             public void onChanged(CurrentWeather currentWeather) {

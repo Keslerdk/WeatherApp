@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
+import com.example.weatherapp.data.network.response.Forecast7DaysResponse;
 
 import java.io.IOException;
 
@@ -27,6 +28,14 @@ public interface WeatherApiRequest {
     @GET("weather")
     Call<CurrentWeatherResponse> getCurrentWeather(
             @Query("q") String city
+    );
+
+    //    onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+    @GET("onecall")
+    Call<Forecast7DaysResponse> get7DaysForecast(
+            @Query("lat") float lat,
+            @Query("lon") float lon,
+            @Query("exclude") String exlude
     );
 
 
@@ -71,6 +80,6 @@ public interface WeatherApiRequest {
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiCon = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo mobCon = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        return (wifiCon!=null && wifiCon.isConnected() || mobCon!=null && mobCon.isConnected());
+        return (wifiCon != null && wifiCon.isConnected() || mobCon != null && mobCon.isConnected());
     }
 }

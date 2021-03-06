@@ -13,6 +13,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.weatherapp.data.db.entity.CloudsCurrentWeather;
+import com.example.weatherapp.data.db.entity.CoordCurrentWeather;
 import com.example.weatherapp.data.db.entity.CurrentWeather;
 import com.example.weatherapp.data.db.entity.MainCurrentWeather;
 import com.example.weatherapp.data.db.entity.WeatherCurrentWeather;
@@ -21,7 +22,7 @@ import com.example.weatherapp.data.db.entity.WindCurrentWeather;
 import kotlin.jvm.Volatile;
 
 @Database(entities = {CurrentWeather.class},
-        version = 3
+        version = 4
 )
 public abstract class ForecastDatabase extends RoomDatabase {
 
@@ -76,7 +77,7 @@ public abstract class ForecastDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            currentWeatherDao.upsert(new CurrentWeather(new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
+            currentWeatherDao.upsert(new CurrentWeather(new CoordCurrentWeather(11212, 12314),new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
                     new MainCurrentWeather(1, 2, 3),
                     new WindCurrentWeather(1, 2),
                     new CloudsCurrentWeather(1), "aaa"));

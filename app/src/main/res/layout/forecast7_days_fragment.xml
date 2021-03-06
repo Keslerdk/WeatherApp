@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.weather.future.Forecast7DaysFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/forecastRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="7 days Forecast" />
+        android:background="#CECECE"
+        android:scrollbars="vertical"/>
 
 </FrameLayout>

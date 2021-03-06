@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey;
 public class CurrentWeather {
     public int CURRENT_WEATHER_ID = 0;
 
+    @Embedded(prefix = "coord")
+    public  CoordCurrentWeather coordCurrentWeather;
     @Embedded(prefix = "weather")
     public WeatherCurrentWeather weather;
     @Embedded(prefix = "main")
@@ -22,7 +24,9 @@ public class CurrentWeather {
     @PrimaryKey(autoGenerate = false)
     public int id = CURRENT_WEATHER_ID;
 
-    public CurrentWeather(WeatherCurrentWeather weather, MainCurrentWeather main, WindCurrentWeather wind, CloudsCurrentWeather clouds, String name) {
+    public CurrentWeather(CoordCurrentWeather coordCurrentWeather, WeatherCurrentWeather weather,
+                          MainCurrentWeather main, WindCurrentWeather wind, CloudsCurrentWeather clouds, String name) {
+        this.coordCurrentWeather = coordCurrentWeather;
         this.weather = weather;
         this.main = main;
         this.wind = wind;

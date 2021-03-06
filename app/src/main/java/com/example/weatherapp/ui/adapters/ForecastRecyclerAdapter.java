@@ -1,33 +1,59 @@
 package com.example.weatherapp.ui.adapters;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CurrrentWeatherRecyclerAdapter extends RecyclerView.Adapter<CurrrentWeatherRecyclerAdapter.CurViewHolder> {
+import com.example.weatherapp.R;
+import com.example.weatherapp.ui.Forecast7DaysItem;
 
+import java.util.ArrayList;
+
+public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecyclerAdapter.ForecastViewHolder> {
+
+    private ArrayList<Forecast7DaysItem> mforecast7DaysItems;
+
+    public ForecastRecyclerAdapter(ArrayList<Forecast7DaysItem> mforecast7DaysItems) {
+        this.mforecast7DaysItems = mforecast7DaysItems;
+    }
 
     @NonNull
     @Override
-    public CurViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public ForecastViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_card, parent,
+                false);
+        ForecastViewHolder fvh = new ForecastViewHolder(view);
+        return fvh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CurViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ForecastViewHolder holder, int position) {
+        Forecast7DaysItem currentItem = mforecast7DaysItems.get(position);
 
+        holder.forecastIcon.setImageResource(currentItem.getImageIcon());
+        holder.dayTemp.setText(currentItem.getTemp());
+        holder.feelsLikeTemp.setText(currentItem.getFeelsLiketemp());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mforecast7DaysItems.size();
     }
 
-    public class CurViewHolder extends RecyclerView.ViewHolder {
-        public CurViewHolder(@NonNull View itemView) {
+    public class ForecastViewHolder extends RecyclerView.ViewHolder {
+        public ImageView forecastIcon;
+        public TextView dayTemp;
+        public TextView feelsLikeTemp;
+        public ForecastViewHolder(@NonNull View itemView) {
             super(itemView);
+            forecastIcon = itemView.findViewById(R.id.forecastIcon);
+            dayTemp =  itemView.findViewById(R.id.dayTemp);
+            feelsLikeTemp = itemView.findViewById(R.id.feelLikeTemp);
         }
     }
 }
