@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:text="Воскресенье   17:22"
-                style="@style/ThemeDescription"
+                style="@style/CurrentWeatherDescriptionStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cityName" />
@@ -61,7 +61,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="17dp"
                 android:text="-5°C"
-                style="@style/TextNumberSyle"
+                style="@style/CurrentWeatherNumberStyle"
                 android:textSize="32dp"
                 android:textColor="#232F34"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
                 android:layout_height="24dp"
                 android:text="Небольшой снег"
                 android:textSize="18dp"
-                style="@style/ThemeDescription"
+                style="@style/CurrentWeatherDescriptionStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/feelLikeCur" />
@@ -82,7 +82,7 @@
 
             <TextView
                 android:id="@+id/textView1"
-                style="@style/curItemsStyle"
+                style="@style/CurrentWeatherItemStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/textView3"
-                style="@style/curItemsStyle"
+                style="@style/CurrentWeatherItemStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -110,7 +110,7 @@
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
                 android:text="Ветер"
-                style="@style/curItemsStyle"
+                style="@style/CurrentWeatherItemStyle"
                 app:layout_constraintEnd_toEndOf="@+id/curDescription"
                 app:layout_constraintStart_toStartOf="@+id/curDescription"
                 app:layout_constraintTop_toBottomOf="@+id/curDescription" />
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:text="-1°C"
-                style="@style/TextNumberSyle"
+                style="@style/CurrentWeatherNumberStyle"
                 app:layout_constraintEnd_toEndOf="@+id/textView1"
                 app:layout_constraintStart_toStartOf="@+id/textView1"
                 app:layout_constraintTop_toBottomOf="@+id/textView1" />
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:text="20км/ч"
-                style="@style/TextNumberSyle"
+                style="@style/CurrentWeatherNumberStyle"
                 app:layout_constraintEnd_toEndOf="@+id/textView4"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:text="24%"
-                style="@style/TextNumberSyle"
+                style="@style/CurrentWeatherNumberStyle"
                 app:layout_constraintEnd_toEndOf="@+id/textView3"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />

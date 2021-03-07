@@ -32,7 +32,7 @@ public class FavouriteWeatherFragment extends Fragment {
 
     private List<FavouriteItem> favouriteItemList = new ArrayList<>();
     private RecyclerView favRecyclerView;
-    private RecyclerView.Adapter favAdapter;
+    private FavouriteRecyclerAdapter favAdapter;
     private RecyclerView.LayoutManager favLayoutManager;
 
     @Override
@@ -49,6 +49,10 @@ public class FavouriteWeatherFragment extends Fragment {
         // TODO: Use the ViewModel
         favouriteItemList.add(new FavouriteItem("Moscow", 1, 2, 100));
         initRecyclerView(getView());
+
+
+
+
     }
 
     private void initRecyclerView(View view) {
@@ -57,5 +61,17 @@ public class FavouriteWeatherFragment extends Fragment {
         favAdapter = new FavouriteRecyclerAdapter(favouriteItemList);
         favRecyclerView.setLayoutManager(favLayoutManager);
         favRecyclerView.setAdapter(favAdapter);
+
+        favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
+            }
+        });
+    }
+
+    public void removeItem(int position) {
+        favouriteItemList.remove(position);
+        favAdapter.notifyItemRemoved(position);
     }
 }
