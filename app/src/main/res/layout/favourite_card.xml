@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="12dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="8dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iconFav"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#CECECE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cityNameFav"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="14dp"
+            android:text="Москва"
+            android:textColor="#232F34"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iconFav"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/dayTempFav"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:text="5C"
+            android:textColor="#232F34"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="Ощущается как"
+            android:textColor="#344955"
+            android:textSize="12dp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@+id/cityNameFav"
+            app:layout_constraintTop_toBottomOf="@+id/cityNameFav" />
+
+        <TextView
+            android:id="@+id/feelLikeFav"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="2C"
+            android:textSize="12dp"
+            android:textStyle="normal"
+            android:textColor="#344955"
+            app:layout_constraintEnd_toEndOf="@+id/dayTempFav"
+            app:layout_constraintTop_toBottomOf="@+id/dayTempFav" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/expandable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iconFav">
+
+            <TextView
+                android:id="@+id/textViewTest"
+                style="@style/TextStyleCurrentWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="12dp"
+                android:text="Ветер"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/windFav"
+                style="@style/TextNumberSyle"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="100км/ч"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewTest" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

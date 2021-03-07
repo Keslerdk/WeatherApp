@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.weather.future;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,8 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.ui.recyclerViews.Forecast7DaysItem;
 import com.example.weatherapp.ui.recyclerViews.ForecastRecyclerAdapter;
+import com.example.weatherapp.ui.setting.search.SearchWeatherViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,22 +46,27 @@ public class Forecast7DaysFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.forecast7_days_fragment, container, false);
-
-        //создание и зполнение ресайклер вью
-        creatRecyclerView();
-        buildrecyclerView(view);
-
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(Forecast7DaysViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(Forecast7DaysViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(Forecast7DaysViewModel.class);
         // TODO: Use the ViewModel
-
+        mViewModel.getForecast7Days().observe(getViewLifecycleOwner(), new Observer<Forecast7Days>() {
+            @Override
+            public void onChanged(Forecast7Days forecast7Days) {
+                for (int i = 0; i < 7; i++) {
+                    exampleList.add(new Forecast7DaysItem(String.valueOf(forecast7Days.getForecastDaily().get(i).getTempForecast().getDay()),
+                            String.valueOf(forecast7Days.getForecastDaily().get(i).getFeelsLikeForecast().getDay())));
+                }
+                buildrecyclerView(getView());
+            }
+        });
     }
-    
+
     private void buildrecyclerView(View view) {
         forecastRecyclerView = view.findViewById(R.id.forecastRecyclerView);
         forecastRecyclerView.setHasFixedSize(true);
@@ -66,18 +75,6 @@ public class Forecast7DaysFragment extends Fragment {
         forecastRecyclerView.setLayoutManager(forecastLayoutManager);
         forecastRecyclerView.setAdapter(forecastAdapter);
     }
-    
-    private void  creatRecyclerView () {
-        List<String> weekDays = new ArrayList<>();
-        weekDays.add("Понедельник");
-        weekDays.add("Вторник");
-        weekDays.add("Среда");
-        weekDays.add("Четверг");
-        weekDays.add("Пятница");
-        weekDays.add("Суббота");
-        weekDays.add("Воскресенье");
 
-        for (String val : weekDays) exampleList.add(new Forecast7DaysItem(R.drawable.ic_7days, "Line 1", "Line 2"));
-    }
 
 }

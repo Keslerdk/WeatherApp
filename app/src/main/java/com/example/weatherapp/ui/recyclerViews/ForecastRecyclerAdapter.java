@@ -34,7 +34,7 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
     public void onBindViewHolder(@NonNull ForecastViewHolder holder, int position) {
         Forecast7DaysItem currentItem = mforecast7DaysItems.get(position);
 
-        holder.forecastIcon.setImageResource(currentItem.getImageIcon());
+//        holder.forecastIcon.setImageResource(currentItem.getImageIcon());
         holder.dayTemp.setText(currentItem.getTemp());
         holder.feelsLikeTemp.setText(currentItem.getFeelsLiketemp());
     }
