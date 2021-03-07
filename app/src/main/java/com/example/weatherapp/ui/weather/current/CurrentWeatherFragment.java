@@ -31,7 +31,6 @@ public class CurrentWeatherFragment extends Fragment {
     private TextView cityName;
     private TextView tempCur;
     private TextView feels_likeCur;
-    private TextView cloudsCur;
     private TextView humidityCur;
     private TextView windCur;
 
@@ -42,8 +41,7 @@ public class CurrentWeatherFragment extends Fragment {
 
         cityName = view.findViewById(R.id.cityName);
         tempCur = view.findViewById(R.id.tempCur);
-        feels_likeCur = view.findViewById(R.id.feels_likeCur);
-        cloudsCur = view.findViewById(R.id.cloudsCur);
+        feels_likeCur = view.findViewById(R.id.feelLikeCur);
         humidityCur = view.findViewById(R.id.humidityCur);
         windCur = view.findViewById(R.id.windCur);
 
@@ -65,7 +63,6 @@ public class CurrentWeatherFragment extends Fragment {
                 cityName.setText(currentWeather.getName());
                 tempCur.setText(String.valueOf(currentWeather.getMain().getTemp()));
                 feels_likeCur.setText(String.valueOf(currentWeather.getMain().getFeels_like()));
-                cloudsCur.setText(String.valueOf(currentWeather.getClouds().getAll()));
                 humidityCur.setText(String.valueOf(currentWeather.getMain().getHumidity()));
                 windCur.setText(String.valueOf(currentWeather.getWind().getSpeed()));
 

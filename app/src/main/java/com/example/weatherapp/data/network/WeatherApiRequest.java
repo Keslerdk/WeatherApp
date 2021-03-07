@@ -28,7 +28,9 @@ public interface WeatherApiRequest {
     //запрос на текущую погоду
     @GET("weather")
     Call<CurrentWeatherResponse> getCurrentWeather(
-            @Query("q") String city
+            @Query("q") String city,
+            @Query("lang") String lang,
+            @Query("units") String units
     );
 
     //    onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
@@ -37,7 +39,9 @@ public interface WeatherApiRequest {
     Call<Forecast7DaysResponse> get7DaysForecast(
             @Query("lat") float lat,
             @Query("lon") float lon,
-            @Query("exclude") String exlude
+            @Query("exclude") String exlude,
+            @Query("lang") String lang,
+            @Query("units") String units
     );
 
 

@@ -86,8 +86,8 @@ public class SearchWeatherFragment extends Fragment {
 
                 WeatherApiRequest jsonPlaceHolderApi = WeatherApiRequest.invoke();
 
-                Call<CurrentWeatherResponse> callCurrentWeather = jsonPlaceHolderApi.getCurrentWeather(cityName);
-                Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly");
+                Call<CurrentWeatherResponse> callCurrentWeather = jsonPlaceHolderApi.getCurrentWeather(cityName, "ru", "metric");
+                Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly", "ru", "metric");
 
                 //если есть подключение к интернету отправляем запросы
                 if (WeatherApiRequest.isOnline(getContext())) {
