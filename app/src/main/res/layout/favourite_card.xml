@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/descriptionFav"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:text="Небольшой снег"

@@ -28,6 +28,10 @@ public class FavouriteWeatherViewModel extends AndroidViewModel {
         forecastRepo.insert(favourites);
     }
 
+    public void delete(Favourites favourites) {
+        forecastRepo.delete(favourites);
+    }
+
     public LiveData<List<Favourites>> getFavourites() {
         return  favouritesLiveData;
     }

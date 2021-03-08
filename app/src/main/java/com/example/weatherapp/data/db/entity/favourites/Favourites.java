@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.db.entity.favourites;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "favourites_table")
@@ -15,6 +16,9 @@ public class Favourites {
     public float windFav;
     public float humidityFav;
 
+    @Ignore
+    public boolean expended;
+
     public Favourites(String nameCity, String descriptionFav, float feelLikeFav, float tempFav,
                       float windFav, float humidityFav) {
         this.nameCity = nameCity;
@@ -23,6 +27,8 @@ public class Favourites {
         this.tempFav = tempFav;
         this.windFav = windFav;
         this.humidityFav = humidityFav;
+
+        this.expended = false;
     }
 
 //    public void setId(int id) {
@@ -51,5 +57,15 @@ public class Favourites {
 
     public float getHumidityFav() {
         return humidityFav;
+    }
+
+
+
+    public boolean isExpended() {
+        return expended;
+    }
+
+    public void setExpended(boolean expended) {
+        this.expended = expended;
     }
 }

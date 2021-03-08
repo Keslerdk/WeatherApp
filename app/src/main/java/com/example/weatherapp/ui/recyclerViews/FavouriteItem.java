@@ -3,6 +3,7 @@ package com.example.weatherapp.ui.recyclerViews;
 public class FavouriteItem {
 //    int image;
     String cityName;
+    String description;
     float temp;
     float feels_like;
 //    float clouds;

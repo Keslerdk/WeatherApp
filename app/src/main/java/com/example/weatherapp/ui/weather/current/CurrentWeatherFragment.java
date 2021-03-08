@@ -9,14 +9,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
+import com.example.weatherapp.data.db.entity.favourites.Favourites;
 
 import org.w3c.dom.Text;
 
@@ -33,6 +37,10 @@ public class CurrentWeatherFragment extends Fragment {
     private TextView feels_likeCur;
     private TextView humidityCur;
     private TextView windCur;
+    private ImageView starCur;
+
+    private boolean isFavourite = false;
+    Favourites favouriteItem;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -44,7 +52,7 @@ public class CurrentWeatherFragment extends Fragment {
         feels_likeCur = view.findViewById(R.id.feelLikeCur);
         humidityCur = view.findViewById(R.id.humidityCur);
         windCur = view.findViewById(R.id.windCur);
-
+        starCur = view.findViewById(R.id.starCur);
         return view;
     }
 
@@ -69,7 +77,36 @@ public class CurrentWeatherFragment extends Fragment {
                 Toast.makeText(getContext(), currentWeather.name, Toast.LENGTH_SHORT).show();
             }
         });
+        mViewModel.getCurrentWeather().observe(getViewLifecycleOwner(), new Observer<CurrentWeather>() {
+            @Override
+            public void onChanged(CurrentWeather currentWeather) {
+                favouriteItem = new Favourites(currentWeather.getName(), currentWeather.getWeather().getDescription(),
+                        currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
+                        currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
 
+//                        mViewModel.insert(new Favourites(currentWeather.getName(), currentWeather.getWeather().getDescription(),
+//                        currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
+//                        currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity()));
+            }
+        });
+
+
+        starCur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isFavourite) {
+                    isFavourite=true;
+                    starCur.setImageResource(R.drawable.ic_star_yellow);
+                    mViewModel.insert(favouriteItem);
+                } else {
+                    isFavourite=false;
+                    starCur.setImageResource(R.drawable.ic_favourite);
+                    //TODO: delete
+                    mViewModel.delete(favouriteItem);
+                    Log.d("unFavourite", "deleted");
+                }
+
+            }
+        });
     }
-
 }

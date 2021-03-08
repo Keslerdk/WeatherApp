@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.weatherapp.data.db.ForecastRepo;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
+import com.example.weatherapp.data.db.entity.favourites.Favourites;
 ;
 
 public class CurrentWeatherViewModel extends AndroidViewModel {
@@ -23,6 +24,13 @@ public class CurrentWeatherViewModel extends AndroidViewModel {
     }
     public void upsert(CurrentWeather currentWeather) {
         forecastRepo.upsert(currentWeather);
+    }
+
+    public void insert(Favourites favourites) {
+        forecastRepo.insert(favourites);
+    }
+    public void delete(Favourites favourites) {
+        forecastRepo.delete(favourites);
     }
 
     public LiveData<CurrentWeather> getCurrentWeather() {

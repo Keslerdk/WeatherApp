@@ -35,7 +35,6 @@ public class FavouriteWeatherFragment extends Fragment {
         return new FavouriteWeatherFragment();
     }
 
-    private List<FavouriteItem> favouriteItemList = new ArrayList<>();
     private RecyclerView favRecyclerView;
     private FavouriteRecyclerAdapter favAdapter;
     private RecyclerView.LayoutManager favLayoutManager;
@@ -53,40 +52,35 @@ public class FavouriteWeatherFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(FavouriteWeatherViewModel.class);
 //        mViewModel = new ViewModelProvider(this).get(FavouriteWeatherViewModel.class);
         // TODO: Use the ViewModel
-        mViewModel.insert(new Favourites("zzzz", "lhshvb", 12, 123, 214, 14));
-        mViewModel.getFavourites().observe(getViewLifecycleOwner(), new Observer<List<Favourites>>() {
-            @Override
-            public void onChanged(List<Favourites> favourites) {
-                Log.d("Favourites", String.valueOf(favourites));
-                for (Favourites favourites1 : favourites) {
-                    Log.d("FavouritesFragment", String.valueOf(favourites1.getFeelLikeFav()));
-                    favouriteItemList.add(new FavouriteItem(favourites1.getNameCity(), favourites1.getTempFav(),
-                            favourites1.getFeelLikeFav(), favourites1.getWindFav()));
-                }
-                initRecyclerView(getView());
-            }
-        });
-//        favouriteItemList.add(new FavouriteItem("Moscow", 1, 2, 100));
+
+        initRecyclerView(getView());
 
     }
 
     private void initRecyclerView(View view) {
-        favRecyclerView = view.findViewById(R.id.favRecyclerView);
-        favLayoutManager = new LinearLayoutManager(getContext());
-        favAdapter = new FavouriteRecyclerAdapter(favouriteItemList);
-        favRecyclerView.setLayoutManager(favLayoutManager);
-        favRecyclerView.setAdapter(favAdapter);
 
-        favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
+        mViewModel.getFavourites().observe(getViewLifecycleOwner(), new Observer<List<Favourites>>() {
             @Override
-            public void onDeleteClick(int position) {
-                removeItem(position);
+            public void onChanged(List<Favourites> favourites) {
+                favRecyclerView = view.findViewById(R.id.favRecyclerView);
+                favLayoutManager = new LinearLayoutManager(getContext());
+                favAdapter = new FavouriteRecyclerAdapter(favourites);
+                favRecyclerView.setLayoutManager(favLayoutManager);
+                favRecyclerView.setAdapter(favAdapter);
+
+                favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onDeleteClick(int position) {
+                        mViewModel.delete(favourites.get(position));
+                        favAdapter.notifyItemRemoved(position);
+                    }
+                });
             }
         });
+
+
+
+
     }
 
-    public void removeItem(int position) {
-        favouriteItemList.remove(position);
-        favAdapter.notifyItemRemoved(position);
-    }
 }

@@ -12,12 +12,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.data.db.entity.favourites.Favourites;
 
 import java.util.List;
 
 public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecyclerAdapter.FavouriteRecuclerHolder> {
 
-    List<FavouriteItem> favouriteItemList;
+    List<Favourites> favouriteItemList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -28,7 +29,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         mListener = listener;
     }
 
-    public FavouriteRecyclerAdapter(List<FavouriteItem> favouriteItemList) {
+    public FavouriteRecyclerAdapter(List<Favourites> favouriteItemList) {
         this.favouriteItemList = favouriteItemList;
     }
 
@@ -42,13 +43,13 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
 
     @Override
     public void onBindViewHolder(@NonNull FavouriteRecuclerHolder holder, int position) {
-        FavouriteItem currentItem = favouriteItemList.get(position);
+        Favourites currentItem = favouriteItemList.get(position);
 
 //        holder.iconFav.setImageResource(currentItem.getImage());
-        holder.cityNameFav.setText(currentItem.getCityName());
-        holder.dayTempFav.setText(String.valueOf(currentItem.getTemp()));
-        holder.feelsLikeFav.setText(String.valueOf(currentItem.getFeels_like()));
-        holder.windFav.setText(String.valueOf(currentItem.getWind()));
+        holder.cityNameFav.setText(currentItem.getNameCity());
+        holder.dayTempFav.setText(String.valueOf(currentItem.getTempFav()));
+        holder.feelsLikeFav.setText(String.valueOf(currentItem.getFeelLikeFav()));
+        holder.windFav.setText(String.valueOf(currentItem.getWindFav()));
 
         boolean isExpanded = favouriteItemList.get(position).isExpended();
         holder.expandable.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -67,6 +68,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         private TextView windFav;
         private ConstraintLayout expandable;
         private ImageView starFav;
+        private TextView descriptionFav;
         private ImageView expandableMenu;
 
         public FavouriteRecuclerHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -78,13 +80,14 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
             windFav = itemView.findViewById(R.id.windFav);
             expandable = itemView.findViewById(R.id.expandable);
             starFav = itemView.findViewById(R.id.starFav);
+            descriptionFav = iconFav.findViewById(R.id.descriptionFav);
             expandableMenu = itemView.findViewById(R.id.expanded_menu);
 
             expandableMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    FavouriteItem favouriteItem = favouriteItemList.get(getAdapterPosition());
+                    Favourites favouriteItem = favouriteItemList.get(getAdapterPosition());
                     if (favouriteItem.isExpended()) {
                         expandableMenu.setImageResource(R.drawable.ic_expand_less);
                         favouriteItem.setExpended(false);
@@ -94,8 +97,6 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
                         favouriteItem.setExpended(true);
                         notifyItemChanged(getAdapterPosition());
                     }
-//                    favouriteItem.setExpended(!favouriteItem.isExpended());
-//                    notifyItemChanged(getAdapterPosition());
                 }
             });
 
