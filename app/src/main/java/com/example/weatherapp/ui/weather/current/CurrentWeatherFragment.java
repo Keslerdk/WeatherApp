@@ -9,11 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,7 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.db.entity.favourites.Favourites;
 
-import org.w3c.dom.Text;
+import java.util.List;
 
 public class CurrentWeatherFragment extends Fragment {
 
@@ -40,7 +38,8 @@ public class CurrentWeatherFragment extends Fragment {
     private ImageView starCur;
 
     private boolean isFavourite = false;
-    Favourites favouriteItem;
+    Favourites currentItem;
+    List<Favourites> favouritesMain;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -63,10 +62,20 @@ public class CurrentWeatherFragment extends Fragment {
 //        mViewModel = new ViewModelProvider(this).get(CurrentWeatherViewModel.class);
         // TODO: Use the ViewModel
 
-        //просмотр текущего города в базе
+        mViewModel.getFavourites().observe(getViewLifecycleOwner(), new Observer<List<Favourites>>() {
+            @Override
+            public void onChanged(List<Favourites> favourites) {
+                favouritesMain = favourites;
+            }
+        });
+
         mViewModel.getCurrentWeather().observe(getViewLifecycleOwner(), new Observer<CurrentWeather>() {
             @Override
             public void onChanged(CurrentWeather currentWeather) {
+                currentItem = new Favourites(currentWeather.getName(), currentWeather.getWeather().getDescription(),
+                        currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
+                        currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
+                currentItem.setId(currentWeather.getIdCity());
 
                 cityName.setText(currentWeather.getName());
                 tempCur.setText(String.valueOf(currentWeather.getMain().getTemp()));
@@ -77,19 +86,6 @@ public class CurrentWeatherFragment extends Fragment {
                 Toast.makeText(getContext(), currentWeather.name, Toast.LENGTH_SHORT).show();
             }
         });
-        mViewModel.getCurrentWeather().observe(getViewLifecycleOwner(), new Observer<CurrentWeather>() {
-            @Override
-            public void onChanged(CurrentWeather currentWeather) {
-                favouriteItem = new Favourites(currentWeather.getName(), currentWeather.getWeather().getDescription(),
-                        currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
-                        currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
-
-//                        mViewModel.insert(new Favourites(currentWeather.getName(), currentWeather.getWeather().getDescription(),
-//                        currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
-//                        currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity()));
-            }
-        });
-
 
         starCur.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,13 +93,11 @@ public class CurrentWeatherFragment extends Fragment {
                 if (!isFavourite) {
                     isFavourite=true;
                     starCur.setImageResource(R.drawable.ic_star_yellow);
-                    mViewModel.insert(favouriteItem);
+                    mViewModel.insert(currentItem);
                 } else {
                     isFavourite=false;
                     starCur.setImageResource(R.drawable.ic_favourite);
-                    //TODO: delete
-                    mViewModel.delete(favouriteItem);
-                    Log.d("unFavourite", "deleted");
+                    mViewModel.delete(favouritesMain.get(favouritesMain.size()-1));
                 }
 
             }

@@ -4,6 +4,8 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "current_weather")
 public class CurrentWeather {
     public int CURRENT_WEATHER_ID = 0;
@@ -20,18 +22,23 @@ public class CurrentWeather {
     public CloudsCurrentWeather clouds;
 
     public String name;
+    @SerializedName("id")
+    public int idCity;
+    public boolean isFavourite;
 
     @PrimaryKey(autoGenerate = false)
     public int id = CURRENT_WEATHER_ID;
 
     public CurrentWeather(CoordCurrentWeather coordCurrentWeather, WeatherCurrentWeather weather,
-                          MainCurrentWeather main, WindCurrentWeather wind, CloudsCurrentWeather clouds, String name) {
+                          MainCurrentWeather main, WindCurrentWeather wind, CloudsCurrentWeather clouds, String name, int idCity) {
         this.coordCurrentWeather = coordCurrentWeather;
         this.weather = weather;
         this.main = main;
         this.wind = wind;
         this.clouds = clouds;
         this.name = name;
+        this.idCity = idCity;
+        this.isFavourite = false;
     }
 
     public WeatherCurrentWeather getWeather() {
@@ -54,5 +61,15 @@ public class CurrentWeather {
         return name;
     }
 
+    public int getIdCity() {
+        return idCity;
+    }
 
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 }

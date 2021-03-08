@@ -9,6 +9,7 @@ public class Favourites {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
+//    public int iconFav;
     public String nameCity;
     public String descriptionFav;
     public float feelLikeFav;
@@ -31,9 +32,9 @@ public class Favourites {
         this.expended = false;
     }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNameCity() {
         return nameCity;
@@ -58,6 +59,10 @@ public class Favourites {
     public float getHumidityFav() {
         return humidityFav;
     }
+
+//    public int getIconFav() {
+//        return iconFav;
+//    }
 
 
 

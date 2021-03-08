@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,18 +63,6 @@ public class SearchWeatherFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SearchWeatherViewModel.class);
 //        mViewModel = new ViewModelProvider(this).get(SearchWeatherViewModel.class);
 
-
-        //координаты из базы
-        mViewModel.getCurrentWeather().observe(getViewLifecycleOwner() , new Observer<CurrentWeather>() {
-            @Override
-            public void onChanged(CurrentWeather currentWeather) {
-//                lat = currentWeather.coordCurrentWeather.getLat();
-//                lon = currentWeather.coordCurrentWeather.getLon();
-//                Log.d("CurrentWeatherCoord", String.valueOf(lat)+111);
-            }
-        });
-
-
         // TODO: Use the ViewModel
         //при нажатии на кнопку отправлять 2 запроса
         //на текущую погоду и на прогноз
@@ -85,9 +74,7 @@ public class SearchWeatherFragment extends Fragment {
                 cityName = cityInput.getEditText().getText().toString();
 
                 WeatherApiRequest jsonPlaceHolderApi = WeatherApiRequest.invoke();
-
                 Call<CurrentWeatherResponse> callCurrentWeather = jsonPlaceHolderApi.getCurrentWeather(cityName, "ru", "metric");
-//                Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly", "ru", "metric");
 
                 //если есть подключение к интернету отправляем запросы
                 if (WeatherApiRequest.isOnline(getContext())) {
@@ -96,14 +83,14 @@ public class SearchWeatherFragment extends Fragment {
                     callCurrentWeather.enqueue(new Callback<CurrentWeatherResponse>() {
                         @Override
                         public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
-
                             CurrentWeatherResponse val = response.body();
-
                             //обновляем базу
                             mViewModel.upsert(new CurrentWeather(val.getCoord(), val.getWeather().get(0), val.getMain(),
-                                    val.getWind(), val.getClouds(), val.getName()));
+                                    val.getWind(), val.getClouds(), val.getName(), val.getId()));
+                            //координаты для следующего запроса
+                            lat = val.getCoord().getLat();
+                            lon = val.getCoord().getLon();
                         }
-
                         @Override
                         public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
 
@@ -112,27 +99,33 @@ public class SearchWeatherFragment extends Fragment {
                         }
                     });
 
-                    //асинхронный запрос на прогноз
-//                    callForecast.enqueue(new Callback<Forecast7DaysResponse>() {
-//                        @Override
-//                        public void onResponse(Call<Forecast7DaysResponse> call, Response<Forecast7DaysResponse> response) {
-//                            //обновляем в базу
-//                            Forecast7DaysResponse val = response.body();
-//                            mViewModel.upsert(new Forecast7Days(val.getDaily()));
-//
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<Forecast7DaysResponse> call, Throwable t) {
-//
-//                            //TODO: сделать диалологовое окно с ошибкой
-//                        }
-//                    });
-//
-                } else {
-//
-                    //TODO: сделать диалологовое окно с ошибкой
+                    //задержка чтобы вопсользовать координатами из прошлого запроса
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
+                            Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly", "ru", "metric");
+                            Log.d("CuurentCoords", String.valueOf(lat));
+
+                            // асинхронный запрос на прогноз
+                            callForecast.enqueue(new Callback<Forecast7DaysResponse>() {
+                                @Override
+                                public void onResponse(Call<Forecast7DaysResponse> call, Response<Forecast7DaysResponse> response) {
+                                    //обновляем в базу
+                                    Forecast7DaysResponse val = response.body();
+                                    mViewModel.upsert(new Forecast7Days(val.getDaily()));
+                                }
+                                @Override
+                                public void onFailure(Call<Forecast7DaysResponse> call, Throwable t) {
+
+                                    //TODO: сделать диалологовое окно с ошибкой
+                                }
+                            });
+                        }
+                    }, 5000);
+                } else {
+                    //TODO: сделать диалологовое окно с ошибкой
                     Log.d("Network", "no interent connection");
                     Toast.makeText(getContext(), "no Internet Connection", Toast.LENGTH_SHORT);
                 }

@@ -58,7 +58,6 @@ public class FavouriteWeatherFragment extends Fragment {
     }
 
     private void initRecyclerView(View view) {
-
         mViewModel.getFavourites().observe(getViewLifecycleOwner(), new Observer<List<Favourites>>() {
             @Override
             public void onChanged(List<Favourites> favourites) {
@@ -71,8 +70,8 @@ public class FavouriteWeatherFragment extends Fragment {
                 favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
                     @Override
                     public void onDeleteClick(int position) {
-                        mViewModel.delete(favourites.get(position));
                         favAdapter.notifyItemRemoved(position);
+                        mViewModel.delete(favourites.get(position));
                     }
                 });
             }
