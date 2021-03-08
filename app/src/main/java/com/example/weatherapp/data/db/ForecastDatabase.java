@@ -12,6 +12,7 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.weatherapp.data.db.dao.CurrentWeatherDao;
+import com.example.weatherapp.data.db.dao.FavouritesDao;
 import com.example.weatherapp.data.db.dao.Forecast7DaysDao;
 import com.example.weatherapp.data.db.entity.currentWeather.CloudsCurrentWeather;
 import com.example.weatherapp.data.db.entity.currentWeather.CoordCurrentWeather;
@@ -19,18 +20,20 @@ import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.db.entity.currentWeather.MainCurrentWeather;
 import com.example.weatherapp.data.db.entity.currentWeather.WeatherCurrentWeather;
 import com.example.weatherapp.data.db.entity.currentWeather.WindCurrentWeather;
+import com.example.weatherapp.data.db.entity.favourites.Favourites;
 import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.data.db.entity.forecast7Days.ForecastDaily;
 import com.example.weatherapp.data.db.entity.forecast7Days.ForecastDailyConverter;
 
-@Database(entities = {CurrentWeather.class, Forecast7Days.class},
-        version = 6
+@Database(entities = {CurrentWeather.class, Forecast7Days.class, Favourites.class},
+        version = 7
 )
 @TypeConverters(ForecastDailyConverter.class)
 public abstract class ForecastDatabase extends RoomDatabase {
 
     public abstract CurrentWeatherDao currentWeatherDao();
     public abstract Forecast7DaysDao forecast7DaysDao();
+    public abstract FavouritesDao favouritesDao();
 
     public static ForecastDatabase instance;
 
@@ -75,10 +78,12 @@ public abstract class ForecastDatabase extends RoomDatabase {
 
         private CurrentWeatherDao currentWeatherDao;
         private Forecast7DaysDao forecast7DaysDao;
+        private FavouritesDao favouritesDao;
 
         public PopulatedbAsyncTask(ForecastDatabase db) {
             currentWeatherDao = db.currentWeatherDao();
             forecast7DaysDao = db.forecast7DaysDao();
+            favouritesDao = db.favouritesDao();
         }
 
         @Override

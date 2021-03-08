@@ -67,9 +67,9 @@ public class SearchWeatherFragment extends Fragment {
         mViewModel.getCurrentWeather().observe(getViewLifecycleOwner() , new Observer<CurrentWeather>() {
             @Override
             public void onChanged(CurrentWeather currentWeather) {
-                lat = currentWeather.coordCurrentWeather.getLat();
-                lon = currentWeather.coordCurrentWeather.getLon();
-                Log.d("CurrentWeatherCoord", String.valueOf(lat)+111);
+//                lat = currentWeather.coordCurrentWeather.getLat();
+//                lon = currentWeather.coordCurrentWeather.getLon();
+//                Log.d("CurrentWeatherCoord", String.valueOf(lat)+111);
             }
         });
 
@@ -87,7 +87,7 @@ public class SearchWeatherFragment extends Fragment {
                 WeatherApiRequest jsonPlaceHolderApi = WeatherApiRequest.invoke();
 
                 Call<CurrentWeatherResponse> callCurrentWeather = jsonPlaceHolderApi.getCurrentWeather(cityName, "ru", "metric");
-                Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly", "ru", "metric");
+//                Call<Forecast7DaysResponse> callForecast =jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly", "ru", "metric");
 
                 //если есть подключение к интернету отправляем запросы
                 if (WeatherApiRequest.isOnline(getContext())) {
@@ -113,24 +113,24 @@ public class SearchWeatherFragment extends Fragment {
                     });
 
                     //асинхронный запрос на прогноз
-                    callForecast.enqueue(new Callback<Forecast7DaysResponse>() {
-                        @Override
-                        public void onResponse(Call<Forecast7DaysResponse> call, Response<Forecast7DaysResponse> response) {
-                            //обновляем в базу
-                            Forecast7DaysResponse val = response.body();
-                            mViewModel.upsert(new Forecast7Days(val.getDaily()));
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<Forecast7DaysResponse> call, Throwable t) {
-
-                            //TODO: сделать диалологовое окно с ошибкой
-                        }
-                    });
-
+//                    callForecast.enqueue(new Callback<Forecast7DaysResponse>() {
+//                        @Override
+//                        public void onResponse(Call<Forecast7DaysResponse> call, Response<Forecast7DaysResponse> response) {
+//                            //обновляем в базу
+//                            Forecast7DaysResponse val = response.body();
+//                            mViewModel.upsert(new Forecast7Days(val.getDaily()));
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Forecast7DaysResponse> call, Throwable t) {
+//
+//                            //TODO: сделать диалологовое окно с ошибкой
+//                        }
+//                    });
+//
                 } else {
-
+//
                     //TODO: сделать диалологовое окно с ошибкой
 
                     Log.d("Network", "no interent connection");
