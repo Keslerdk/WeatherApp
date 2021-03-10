@@ -23,6 +23,7 @@ import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.data.network.WeatherApiRequest;
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 import com.example.weatherapp.data.network.response.Forecast7DaysResponse;
+import com.example.weatherapp.ui.dialogs.MapDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
@@ -36,6 +37,7 @@ public class SearchWeatherFragment extends Fragment {
     //поля на лейауте
     private TextInputLayout cityInput;
     private Button btnSearch;
+    private Button showDialogBtn;
 
     // имя и координаты для запроса
     String cityName;
@@ -53,6 +55,7 @@ public class SearchWeatherFragment extends Fragment {
         //инициализация
         cityInput = view.findViewById(R.id.cityInput);
         btnSearch = view.findViewById(R.id.btnSearch);
+        showDialogBtn = view.findViewById(R.id.showDialogBtn);
 
         return view;
     }
@@ -132,6 +135,17 @@ public class SearchWeatherFragment extends Fragment {
             }
         });
 
+
+
+
+        showDialogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MapDialog exampleDialog = new MapDialog();
+                exampleDialog.show(getFragmentManager(), "example dialog");
+            }
+        });
     }
+
 
 }
