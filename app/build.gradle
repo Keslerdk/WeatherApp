@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,6 +28,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
 }
 
 dependencies {
@@ -54,4 +58,8 @@ dependencies {
 
     //google maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    //yandex maps
+    implementation 'com.yandex.android:maps.mobile:4.0.0-lite'
+    implementation 'com.android.support:multidex:1.0.3'
 }

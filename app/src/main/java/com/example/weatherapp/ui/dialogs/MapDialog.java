@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.ui.map.GoogleMaps;
+import com.example.weatherapp.ui.map.YandexMaps;
 
 import java.util.List;
 
@@ -72,6 +73,8 @@ public class MapDialog extends AppCompatDialogFragment {
                             intent.putExtra("lat", lat);
                             intent.putExtra("lon", lon);
                             intent.putExtra("cityName", cityName);
+                        } else {
+                            intent = new Intent(getContext(), YandexMaps.class);
                         }
 
                     }
