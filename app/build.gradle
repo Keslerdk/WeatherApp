@@ -51,4 +51,7 @@ dependencies {
     //room
     implementation "android.arch.persistence.room:runtime:1.0.0"
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+
+    //google maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

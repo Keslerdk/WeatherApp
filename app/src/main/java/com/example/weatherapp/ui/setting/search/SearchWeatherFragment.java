@@ -1,12 +1,12 @@
 package com.example.weatherapp.ui.setting.search;
 
-import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Handler;
@@ -43,6 +43,7 @@ public class SearchWeatherFragment extends Fragment {
     String cityName;
     float lat;
     float lon;
+
 
     public static SearchWeatherFragment newInstance() {
         return new SearchWeatherFragment();
@@ -137,15 +138,14 @@ public class SearchWeatherFragment extends Fragment {
 
 
 
-
+        //кнопка для перехода на карты
         showDialogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MapDialog exampleDialog = new MapDialog();
+                //создание всплывающего окна
+                MapDialog exampleDialog = new MapDialog(lat, lon, cityName);
                 exampleDialog.show(getFragmentManager(), "example dialog");
             }
         });
     }
-
-
 }
