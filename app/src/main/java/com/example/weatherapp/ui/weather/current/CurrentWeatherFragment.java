@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.weather.current;
 
 import androidx.lifecycle.Observer;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class CurrentWeatherFragment extends Fragment {
     private TextView humidityCur;
     private TextView windCur;
     private ImageView starCur;
+    private ImageView iconCur;
 
     private boolean isFavourite = false;
     Favourites currentItem;
@@ -52,6 +55,7 @@ public class CurrentWeatherFragment extends Fragment {
         humidityCur = view.findViewById(R.id.humidityCur);
         windCur = view.findViewById(R.id.windCur);
         starCur = view.findViewById(R.id.starCur);
+        iconCur = view.findViewById(R.id.curWeatherIcon);
         return view;
     }
 
@@ -82,6 +86,12 @@ public class CurrentWeatherFragment extends Fragment {
                 feels_likeCur.setText(String.valueOf(currentWeather.getMain().getFeels_like()));
                 humidityCur.setText(String.valueOf(currentWeather.getMain().getHumidity()));
                 windCur.setText(String.valueOf(currentWeather.getWind().getSpeed()));
+                Log.d("currentWeather", "w"+ currentWeather.getWeather().getIcon()+".png");
+                Log.d("curentEather2", String.valueOf(getImageid(getContext(),"w"+ currentWeather.
+                                getWeather().getIcon())));
+                iconCur.setImageResource(getImageid(getContext(),"w"+ currentWeather.
+                        getWeather().getIcon()));
+                //TODO: скачать ночные картинки
 
                 Toast.makeText(getContext(), currentWeather.name, Toast.LENGTH_SHORT).show();
             }
@@ -102,5 +112,10 @@ public class CurrentWeatherFragment extends Fragment {
 
             }
         });
+    }
+
+    public static int getImageid(Context context, String imageName) {
+        return context.getResources().getIdentifier("drawable/"+imageName, null,
+                context.getPackageName());
     }
 }
