@@ -41,8 +41,8 @@ public class SearchWeatherFragment extends Fragment {
 
     // имя и координаты для запроса
     String cityName;
-    float lat;
-    float lon;
+    float lat=2;
+    float lon=3;
 
 
     public static SearchWeatherFragment newInstance() {
@@ -143,6 +143,7 @@ public class SearchWeatherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //создание всплывающего окна
+                Log.d("on click", String.valueOf(lat));
                 MapDialog exampleDialog = new MapDialog(lat, lon, cityName);
                 exampleDialog.show(getFragmentManager(), "example dialog");
             }

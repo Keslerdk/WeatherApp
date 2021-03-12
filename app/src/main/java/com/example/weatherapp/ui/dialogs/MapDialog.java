@@ -38,13 +38,16 @@ public class MapDialog extends AppCompatDialogFragment {
         this.cityName = cityName;
     }
 
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog alertDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-
+//        intent.putExtra("lat", lat);
+//        intent.putExtra("lon", lon);
+//        intent.putExtra("cityName", cityName);
 
 //        LayoutInflater inflater = getActivity().getLayoutInflater();
 //        View view = inflater.inflate(R.layout.layout_dialog, null);
@@ -75,6 +78,9 @@ public class MapDialog extends AppCompatDialogFragment {
                             intent.putExtra("cityName", cityName);
                         } else {
                             intent = new Intent(getContext(), YandexMaps.class);
+                            intent.putExtra("lat", lat);
+                            intent.putExtra("lon", lon);
+                            intent.putExtra("cityName", cityName);
                         }
 
                     }
