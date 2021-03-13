@@ -9,7 +9,7 @@ public class Favourites {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-//    public int iconFav;
+    public int iconFav;
     public String nameCity;
     public String descriptionFav;
     public float feelLikeFav;
@@ -20,8 +20,9 @@ public class Favourites {
     @Ignore
     public boolean expended;
 
-    public Favourites(String nameCity, String descriptionFav, float feelLikeFav, float tempFav,
+    public Favourites(int iconFav, String nameCity, String descriptionFav, float feelLikeFav, float tempFav,
                       float windFav, float humidityFav) {
+        this.iconFav = iconFav;
         this.nameCity = nameCity;
         this.descriptionFav = descriptionFav;
         this.feelLikeFav = feelLikeFav;
@@ -60,9 +61,9 @@ public class Favourites {
         return humidityFav;
     }
 
-//    public int getIconFav() {
-//        return iconFav;
-//    }
+    public int getIconFav() {
+        return iconFav;
+    }
 
 
 

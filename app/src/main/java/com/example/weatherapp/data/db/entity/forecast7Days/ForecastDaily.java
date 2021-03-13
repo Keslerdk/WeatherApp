@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.db.entity.forecast7Days;
 
 import androidx.room.Embedded;
+import androidx.room.TypeConverters;
 
 import java.util.List;
 
@@ -13,18 +14,19 @@ public class ForecastDaily {
     public float wind_speed;
     public float wind_deg;
     @Embedded(prefix = "weatherForecast")
-    public WeatherForecast weatherForecast;
+    @TypeConverters(ForecastWeatherConverter.class)
+    public List<WeatherForecast> weather;
     public float clouds;
 
     public ForecastDaily(TempForecast tempForecast, FeelsLikeForecast feelsLikeForecast,
                          float humidity, float wind_speed, float wind_deg,
-                         WeatherForecast weatherForecast, float clouds) {
+                         List<WeatherForecast> weatherForecast, float clouds) {
         this.temp = tempForecast;
         this.feels_like = feelsLikeForecast;
         this.humidity = humidity;
         this.wind_speed = wind_speed;
         this.wind_deg = wind_deg;
-        this.weatherForecast = weatherForecast;
+        this.weather = weatherForecast;
         this.clouds = clouds;
     }
 
@@ -48,8 +50,8 @@ public class ForecastDaily {
         return wind_deg;
     }
 
-    public WeatherForecast getWeatherForecast() {
-        return weatherForecast;
+    public List<WeatherForecast> getWeather() {
+        return weather;
     }
 
     public float getClouds() {

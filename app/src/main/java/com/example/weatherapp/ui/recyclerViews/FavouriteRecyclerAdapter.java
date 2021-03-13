@@ -45,7 +45,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
     public void onBindViewHolder(@NonNull FavouriteRecuclerHolder holder, int position) {
         Favourites currentItem = favouriteItemList.get(position);
 
-//        holder.iconFav.setImageResource(currentItem.getImage());
+        holder.iconFav.setImageResource(currentItem.getIconFav());
         holder.cityNameFav.setText(currentItem.getNameCity());
         holder.dayTempFav.setText(String.valueOf(currentItem.getTempFav()));
         holder.feelsLikeFav.setText(String.valueOf(currentItem.getFeelLikeFav()));

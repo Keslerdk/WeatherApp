@@ -1,8 +1,8 @@
 package com.example.weatherapp.ui.weather.future;
 
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,8 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.ui.recyclerViews.Forecast7DaysItem;
 import com.example.weatherapp.ui.recyclerViews.ForecastRecyclerAdapter;
-import com.example.weatherapp.ui.setting.search.SearchWeatherViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Forecast7DaysFragment extends Fragment {
 
@@ -59,7 +58,8 @@ public class Forecast7DaysFragment extends Fragment {
             @Override
             public void onChanged(Forecast7Days forecast7Days) {
                 for (int i = 0; i < 7; i++) {
-                    exampleList.add(new Forecast7DaysItem(String.valueOf(forecast7Days.getForecastDaily().get(i).getTempForecast().getDay()),
+                    int icon =getImageid(getContext(),"w"+forecast7Days.getForecastDaily().get(i).getWeather().get(0).getIcon());
+                    exampleList.add(new Forecast7DaysItem(icon,String.valueOf(forecast7Days.getForecastDaily().get(i).getTempForecast().getDay()),
                             String.valueOf(forecast7Days.getForecastDaily().get(i).getFeelsLikeForecast().getDay())));
                 }
                 buildrecyclerView(getView());
@@ -74,6 +74,11 @@ public class Forecast7DaysFragment extends Fragment {
         forecastAdapter = new ForecastRecyclerAdapter(exampleList);
         forecastRecyclerView.setLayoutManager(forecastLayoutManager);
         forecastRecyclerView.setAdapter(forecastAdapter);
+    }
+
+    public static int getImageid(Context context, String imageName) {
+        return context.getResources().getIdentifier("drawable/"+imageName, null,
+                context.getPackageName());
     }
 
 

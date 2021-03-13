@@ -24,11 +24,12 @@ import com.example.weatherapp.data.db.entity.favourites.Favourites;
 import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.data.db.entity.forecast7Days.ForecastDaily;
 import com.example.weatherapp.data.db.entity.forecast7Days.ForecastDailyConverter;
+import com.example.weatherapp.data.db.entity.forecast7Days.ForecastWeatherConverter;
 
 @Database(entities = {CurrentWeather.class, Forecast7Days.class, Favourites.class},
-        version = 8
+        version = 10
 )
-@TypeConverters(ForecastDailyConverter.class)
+@TypeConverters({ForecastDailyConverter.class, ForecastWeatherConverter.class})
 public abstract class ForecastDatabase extends RoomDatabase {
 
     public abstract CurrentWeatherDao currentWeatherDao();

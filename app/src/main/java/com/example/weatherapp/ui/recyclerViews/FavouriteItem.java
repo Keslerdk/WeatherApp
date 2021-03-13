@@ -1,31 +1,30 @@
 package com.example.weatherapp.ui.recyclerViews;
 
 public class FavouriteItem {
-//    int image;
+    int image;
     String cityName;
     String description;
     float temp;
     float feels_like;
-//    float clouds;
-//    float humidity;
+    float humidity;
     float wind;
 
     boolean expended;
 
-    public FavouriteItem(String cityName, float temp, float feels_like, float wind) {
-//        this.image = image;
+    public FavouriteItem(int image, String cityName, float temp, float feels_like, float humidity,
+                         float wind) {
+        this.image = image;
         this.cityName = cityName;
         this.temp = temp;
         this.feels_like = feels_like;
-//        this.clouds = clouds;
-//        this.humidity = humidity;
+        this.humidity = humidity;
         this.wind = wind;
         this.expended = false;
     }
 
-//    public int getImage() {
-//        return image;
-//    }
+    public int getImage() {
+        return image;
+    }
 
     public String getCityName() {
         return cityName;
@@ -39,13 +38,9 @@ public class FavouriteItem {
         return feels_like;
     }
 
-//    public float getClouds() {
-//        return clouds;
-//    }
-//
-//    public float getHumidity() {
-//        return humidity;
-//    }
+    public float getHumidity() {
+        return humidity;
+    }
 
     public float getWind() {
         return wind;

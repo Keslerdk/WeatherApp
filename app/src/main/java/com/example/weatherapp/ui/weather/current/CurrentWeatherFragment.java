@@ -76,7 +76,8 @@ public class CurrentWeatherFragment extends Fragment {
         mViewModel.getCurrentWeather().observe(getViewLifecycleOwner(), new Observer<CurrentWeather>() {
             @Override
             public void onChanged(CurrentWeather currentWeather) {
-                currentItem = new Favourites(currentWeather.getName(), currentWeather.getWeather().getDescription(),
+                int icon = getImageid(getContext(),"w"+ currentWeather.getWeather().getIcon());
+                currentItem = new Favourites( icon,currentWeather.getName(), currentWeather.getWeather().getDescription(),
                         currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
                         currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
                 currentItem.setId(currentWeather.getIdCity());
