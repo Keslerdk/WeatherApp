@@ -1,7 +1,6 @@
 package com.example.weatherapp.ui.setting.favourite;
 
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
@@ -12,19 +11,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.favourites.Favourites;
-import com.example.weatherapp.ui.recyclerViews.FavouriteItem;
 import com.example.weatherapp.ui.recyclerViews.FavouriteRecyclerAdapter;
-import com.example.weatherapp.ui.recyclerViews.ForecastRecyclerAdapter;
-import com.example.weatherapp.ui.setting.search.SearchWeatherViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavouriteWeatherFragment extends Fragment {

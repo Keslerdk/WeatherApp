@@ -27,7 +27,7 @@ import com.example.weatherapp.data.db.entity.forecast7Days.ForecastDailyConverte
 import com.example.weatherapp.data.db.entity.forecast7Days.ForecastWeatherConverter;
 
 @Database(entities = {CurrentWeather.class, Forecast7Days.class, Favourites.class},
-        version = 10
+        version = 11
 )
 @TypeConverters({ForecastDailyConverter.class, ForecastWeatherConverter.class})
 public abstract class ForecastDatabase extends RoomDatabase {
@@ -92,7 +92,7 @@ public abstract class ForecastDatabase extends RoomDatabase {
             currentWeatherDao.upsert(new CurrentWeather(new CoordCurrentWeather(11212, 12314),new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
                     new MainCurrentWeather(1, 2, 3),
                     new WindCurrentWeather(1, 2),
-                    new CloudsCurrentWeather(1), "aaa", 45));
+                    new CloudsCurrentWeather(1),1231, "aaa", 45));
             return null;
         }
     }

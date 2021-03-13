@@ -36,7 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/currentData"
+                android:id="@+id/dataCur"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:text="Воскресенье   17:22"
@@ -53,7 +53,7 @@
                 android:background="#Ffff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentData" />
+                app:layout_constraintTop_toBottomOf="@+id/dataCur" />
 
             <TextView
                 android:id="@+id/feelLikeCur"
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/curWeatherIcon" />
 
             <TextView
-                android:id="@+id/curDescription"
+                android:id="@+id/descriptionCur"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:text="Небольшой снег"
@@ -90,7 +90,7 @@
                 android:layout_marginRight="16dp"
                 android:text="Температура"
                 app:layout_constraintEnd_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/curDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -102,7 +102,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Влажность"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/curDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -111,9 +111,9 @@
                 android:layout_marginTop="16dp"
                 android:text="Ветер"
                 style="@style/CurrentWeatherItemStyle"
-                app:layout_constraintEnd_toEndOf="@+id/curDescription"
-                app:layout_constraintStart_toStartOf="@+id/curDescription"
-                app:layout_constraintTop_toBottomOf="@+id/curDescription" />
+                app:layout_constraintEnd_toEndOf="@+id/descriptionCur"
+                app:layout_constraintStart_toStartOf="@+id/descriptionCur"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
 
             <TextView
                 android:id="@+id/tempCur"

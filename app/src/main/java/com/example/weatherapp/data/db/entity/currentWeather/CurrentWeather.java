@@ -21,6 +21,7 @@ public class CurrentWeather {
     @Embedded(prefix = "clouds")
     public CloudsCurrentWeather clouds;
 
+    public int dt;
     public String name;
     @SerializedName("id")
     public int idCity;
@@ -30,7 +31,7 @@ public class CurrentWeather {
     public int id = CURRENT_WEATHER_ID;
 
     public CurrentWeather(CoordCurrentWeather coordCurrentWeather, WeatherCurrentWeather weather,
-                          MainCurrentWeather main, WindCurrentWeather wind, CloudsCurrentWeather clouds, String name, int idCity) {
+                          MainCurrentWeather main, WindCurrentWeather wind, CloudsCurrentWeather clouds,int dt, String name, int idCity) {
         this.coordCurrentWeather = coordCurrentWeather;
         this.weather = weather;
         this.main = main;
@@ -39,6 +40,7 @@ public class CurrentWeather {
         this.name = name;
         this.idCity = idCity;
         this.isFavourite = false;
+        this.dt=dt;
     }
 
     public WeatherCurrentWeather getWeather() {
@@ -71,5 +73,9 @@ public class CurrentWeather {
 
     public void setFavourite(boolean favourite) {
         isFavourite = favourite;
+    }
+
+    public int getDt() {
+        return dt;
     }
 }

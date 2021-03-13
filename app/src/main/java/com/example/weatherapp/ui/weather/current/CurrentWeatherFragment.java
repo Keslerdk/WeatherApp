@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,10 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.db.entity.favourites.Favourites;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class CurrentWeatherFragment extends Fragment {
 
@@ -33,8 +37,10 @@ public class CurrentWeatherFragment extends Fragment {
     private CurrentWeatherViewModel mViewModel;
 
     private TextView cityName;
+    private TextView dataCur;
     private TextView tempCur;
     private TextView feels_likeCur;
+    private TextView descriptionCur;
     private TextView humidityCur;
     private TextView windCur;
     private ImageView starCur;
@@ -50,8 +56,10 @@ public class CurrentWeatherFragment extends Fragment {
         View view = inflater.inflate(R.layout.current_weather_fragment, container, false);
 
         cityName = view.findViewById(R.id.cityName);
+        dataCur = view.findViewById(R.id.dataCur);
         tempCur = view.findViewById(R.id.tempCur);
         feels_likeCur = view.findViewById(R.id.feelLikeCur);
+        descriptionCur = view.findViewById(R.id.descriptionCur);
         humidityCur = view.findViewById(R.id.humidityCur);
         windCur = view.findViewById(R.id.windCur);
         starCur = view.findViewById(R.id.starCur);
@@ -82,11 +90,17 @@ public class CurrentWeatherFragment extends Fragment {
                         currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
                 currentItem.setId(currentWeather.getIdCity());
 
+                Date date =  new Date(currentWeather.getDt()*1000L);
+                SimpleDateFormat f = new SimpleDateFormat("EEEE, HH:mm");
+                f.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+
                 cityName.setText(currentWeather.getName());
-                tempCur.setText(String.valueOf(currentWeather.getMain().getTemp()));
-                feels_likeCur.setText(String.valueOf(currentWeather.getMain().getFeels_like()));
-                humidityCur.setText(String.valueOf(currentWeather.getMain().getHumidity()));
-                windCur.setText(String.valueOf(currentWeather.getWind().getSpeed()));
+                dataCur.setText(f.format(date));
+                tempCur.setText(String.valueOf(((int) (currentWeather.getMain().getTemp()*10))/10.0)+"°C");
+                feels_likeCur.setText(String.valueOf(((int) (currentWeather.getMain().getFeels_like()*10))/10.0)+"°C");
+                descriptionCur.setText(currentWeather.getWeather().getDescription());
+                humidityCur.setText(String.valueOf((int)(currentWeather.getMain().getHumidity()))+"%");
+                windCur.setText(String.valueOf((int) currentWeather.getWind().getSpeed())+" км/ч");
                 Log.d("currentWeather", "w"+ currentWeather.getWeather().getIcon()+".png");
                 Log.d("curentEather2", String.valueOf(getImageid(getContext(),"w"+ currentWeather.
                                 getWeather().getIcon())));

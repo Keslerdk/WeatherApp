@@ -89,7 +89,7 @@ public class SearchWeatherFragment extends Fragment {
                             CurrentWeatherResponse val = response.body();
                             //обновляем базу
                             mViewModel.upsert(new CurrentWeather(val.getCoord(), val.getWeather().get(0), val.getMain(),
-                                    val.getWind(), val.getClouds(), val.getName(), val.getId()));
+                                    val.getWind(), val.getClouds(),val.getDt(), val.getName(), val.getId()));
                             //координаты для следующего запроса
                             lat = val.getCoord().getLat();
                             lon = val.getCoord().getLon();
