@@ -47,9 +47,11 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
 
         holder.iconFav.setImageResource(currentItem.getIconFav());
         holder.cityNameFav.setText(currentItem.getNameCity());
-        holder.dayTempFav.setText(String.valueOf(currentItem.getTempFav()));
-        holder.feelsLikeFav.setText(String.valueOf(currentItem.getFeelLikeFav()));
-        holder.windFav.setText(String.valueOf(currentItem.getWindFav()));
+        holder.dayTempFav.setText(String.valueOf(((int)(currentItem.getTempFav()*10))/10.0)+"°C");
+        holder.feelsLikeFav.setText(String.valueOf(((int) (currentItem.getFeelLikeFav()*10))/10.0)+"°C");
+        holder.windFav.setText(String.valueOf((int)currentItem.getWindFav())+" км/ч");
+        holder.descriptionFav.setText(currentItem.getDescriptionFav());
+        holder.humidityFav.setText(String.valueOf((int)currentItem.getHumidityFav())+"%");
 
         boolean isExpanded = favouriteItemList.get(position).isExpended();
         holder.expandable.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -70,6 +72,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         private ImageView starFav;
         private TextView descriptionFav;
         private ImageView expandableMenu;
+        private TextView humidityFav;
 
         public FavouriteRecuclerHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -80,8 +83,9 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
             windFav = itemView.findViewById(R.id.windFav);
             expandable = itemView.findViewById(R.id.expandable);
             starFav = itemView.findViewById(R.id.starFav);
-            descriptionFav = iconFav.findViewById(R.id.descriptionFav);
+            descriptionFav = itemView.findViewById(R.id.descriptionFav);
             expandableMenu = itemView.findViewById(R.id.expanded_menu);
+            humidityFav = itemView.findViewById(R.id.humidityFav);
 
             expandableMenu.setOnClickListener(new View.OnClickListener() {
                 @Override

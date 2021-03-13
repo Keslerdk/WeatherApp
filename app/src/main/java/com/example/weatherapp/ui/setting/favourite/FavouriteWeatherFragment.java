@@ -64,14 +64,12 @@ public class FavouriteWeatherFragment extends Fragment {
                 favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
                     @Override
                     public void onDeleteClick(int position) {
-                        favAdapter.notifyItemRemoved(position);
                         mViewModel.delete(favourites.get(position));
+                        favAdapter.notifyItemRemoved(position);
                     }
                 });
             }
         });
-
-
 
 
     }
