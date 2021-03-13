@@ -35,8 +35,9 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
         Forecast7DaysItem currentItem = mforecast7DaysItems.get(position);
 
         holder.forecastIcon.setImageResource(currentItem.getImageIcon());
-        holder.dayTemp.setText(currentItem.getTemp());
-        holder.feelsLikeTemp.setText(currentItem.getFeelsLiketemp());
+        holder.dayTemp.setText(String.valueOf(((int)(currentItem.getTemp()*10))/10.0)+"°C");
+        holder.feelsLikeTemp.setText(((int) (currentItem.getFeelsLiketemp()*10))/10.0+"°C");
+        holder.weekDay.setText(currentItem.getDate());
     }
 
     @Override
@@ -46,11 +47,13 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
 
     public class ForecastViewHolder extends RecyclerView.ViewHolder {
         public ImageView forecastIcon;
+        public TextView weekDay;
         public TextView dayTemp;
         public TextView feelsLikeTemp;
         public ForecastViewHolder(@NonNull View itemView) {
             super(itemView);
             forecastIcon = itemView.findViewById(R.id.forecastIcon);
+            weekDay = itemView.findViewById(R.id.weekDay);
             dayTemp =  itemView.findViewById(R.id.dayTemp);
             feelsLikeTemp = itemView.findViewById(R.id.feelLikeTemp);
         }

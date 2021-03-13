@@ -6,6 +6,7 @@ import androidx.room.TypeConverters;
 import java.util.List;
 
 public class ForecastDaily {
+    int dt;
     @Embedded(prefix = "tempForecast")
     public TempForecast temp;
     @Embedded(prefix = "feelLikeForecast")
@@ -18,9 +19,10 @@ public class ForecastDaily {
     public List<WeatherForecast> weather;
     public float clouds;
 
-    public ForecastDaily(TempForecast tempForecast, FeelsLikeForecast feelsLikeForecast,
+    public ForecastDaily(int dt,TempForecast tempForecast, FeelsLikeForecast feelsLikeForecast,
                          float humidity, float wind_speed, float wind_deg,
                          List<WeatherForecast> weatherForecast, float clouds) {
+        this.dt=dt;
         this.temp = tempForecast;
         this.feels_like = feelsLikeForecast;
         this.humidity = humidity;
@@ -56,5 +58,9 @@ public class ForecastDaily {
 
     public float getClouds() {
         return clouds;
+    }
+
+    public int getDt() {
+        return dt;
     }
 }

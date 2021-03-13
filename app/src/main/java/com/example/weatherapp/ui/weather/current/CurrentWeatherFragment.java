@@ -101,14 +101,10 @@ public class CurrentWeatherFragment extends Fragment {
                 descriptionCur.setText(currentWeather.getWeather().getDescription());
                 humidityCur.setText(String.valueOf((int)(currentWeather.getMain().getHumidity()))+"%");
                 windCur.setText(String.valueOf((int) currentWeather.getWind().getSpeed())+" км/ч");
-                Log.d("currentWeather", "w"+ currentWeather.getWeather().getIcon()+".png");
-                Log.d("curentEather2", String.valueOf(getImageid(getContext(),"w"+ currentWeather.
-                                getWeather().getIcon())));
                 iconCur.setImageResource(getImageid(getContext(),"w"+ currentWeather.
                         getWeather().getIcon()));
                 //TODO: скачать ночные картинки
-
-                Toast.makeText(getContext(), currentWeather.name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), String.valueOf(currentWeather.isFavourite()), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -119,6 +115,7 @@ public class CurrentWeatherFragment extends Fragment {
                     isFavourite=true;
                     starCur.setImageResource(R.drawable.ic_star_yellow);
                     mViewModel.insert(currentItem);
+                    //TODO: отображение желтой звездочки через isFavourite()
                 } else {
                     isFavourite=false;
                     starCur.setImageResource(R.drawable.ic_favourite);
@@ -127,6 +124,7 @@ public class CurrentWeatherFragment extends Fragment {
 
             }
         });
+
     }
 
     public static int getImageid(Context context, String imageName) {

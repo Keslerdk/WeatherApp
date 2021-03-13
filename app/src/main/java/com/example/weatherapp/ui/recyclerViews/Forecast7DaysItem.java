@@ -4,24 +4,36 @@ package com.example.weatherapp.ui.recyclerViews;
 //обработка полей в карточке forecast7days
 public class Forecast7DaysItem {
     int imageIcon;
-    String temp;
-    String feelsLiketemp;
+    float temp;
+    float feelsLiketemp;
+    String description;
+    String date;
 
-    public Forecast7DaysItem(int imageIcon,String temp, String feelsLiketemp) {
+    public Forecast7DaysItem(int imageIcon,float temp, float feelsLiketemp,String description, String date) {
         this.imageIcon = imageIcon;
         this.temp = temp;
         this.feelsLiketemp = feelsLiketemp;
+        this.description=description;
+        this.date=date;
     }
 
     public int getImageIcon() {
         return imageIcon;
     }
 
-    public String getTemp() {
+    public float getTemp() {
         return temp;
     }
 
-    public String getFeelsLiketemp() {
+    public float getFeelsLiketemp() {
         return feelsLiketemp;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

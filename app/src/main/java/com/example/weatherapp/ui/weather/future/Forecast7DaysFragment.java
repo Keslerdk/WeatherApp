@@ -22,7 +22,10 @@ import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.ui.recyclerViews.Forecast7DaysItem;
 import com.example.weatherapp.ui.recyclerViews.ForecastRecyclerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Forecast7DaysFragment extends Fragment {
 
@@ -57,10 +60,15 @@ public class Forecast7DaysFragment extends Fragment {
         mViewModel.getForecast7Days().observe(getViewLifecycleOwner(), new Observer<Forecast7Days>() {
             @Override
             public void onChanged(Forecast7Days forecast7Days) {
-                for (int i = 0; i < 7; i++) {
+                for (int i = 1; i < 8; i++) {
                     int icon =getImageid(getContext(),"w"+forecast7Days.getForecastDaily().get(i).getWeather().get(0).getIcon());
-                    exampleList.add(new Forecast7DaysItem(icon,String.valueOf(forecast7Days.getForecastDaily().get(i).getTempForecast().getDay()),
-                            String.valueOf(forecast7Days.getForecastDaily().get(i).getFeelsLikeForecast().getDay())));
+                    Date date = new Date(forecast7Days.getForecastDaily().get(i).getDt()*1000L);
+                    SimpleDateFormat f = new SimpleDateFormat("EEEE, d.MM");
+                    f.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+                    Log.d("weekDay", f.format(date));
+                    exampleList.add(new Forecast7DaysItem(icon,forecast7Days.getForecastDaily().get(i).getTempForecast().getDay(),
+                            forecast7Days.getForecastDaily().get(i).getFeelsLikeForecast().getDay(),
+                            forecast7Days.getForecastDaily().get(i).getWeather().get(0).getDescroption(), f.format(date)));
                 }
                 buildrecyclerView(getView());
             }
