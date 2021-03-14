@@ -38,7 +38,6 @@ public class SearchWeatherFragment extends Fragment {
 
     private TextInputLayout cityInput;
     private Button btnSearch;
-    private Button showDialogBtn;
 
     // имя и координаты для запроса
     String cityName;
@@ -57,7 +56,6 @@ public class SearchWeatherFragment extends Fragment {
         //инициализация
         cityInput = view.findViewById(R.id.cityInput);
         btnSearch = view.findViewById(R.id.btnSearch);
-        showDialogBtn = view.findViewById(R.id.showDialogBtn);
 
         return view;
     }
@@ -96,17 +94,6 @@ public class SearchWeatherFragment extends Fragment {
             }
         });
 
-
-        //кнопка для перехода на карты
-        showDialogBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //создание всплывающего окна
-                Log.d("on click", String.valueOf(lat));
-                MapDialog exampleDialog = new MapDialog(lat, lon, cityName);
-                exampleDialog.show(getFragmentManager(), "example dialog");
-            }
-        });
     }
 
     private void showSnackBar(String text) {
@@ -173,7 +160,6 @@ public class SearchWeatherFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<Forecast7DaysResponse> call, Throwable t) {
-                        //TODO: сделать диалологовое окно с ошибкой
                         showSnackBar("Что-то пошло не так. Попробуйте снова");
                     }
                 });

@@ -89,10 +89,10 @@ public abstract class ForecastDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            currentWeatherDao.upsert(new CurrentWeather(new CoordCurrentWeather(11212, 12314),new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
-                    new MainCurrentWeather(1, 2, 3),
-                    new WindCurrentWeather(1, 2),
-                    new CloudsCurrentWeather(1),1231, "aaa", 45));
+//            currentWeatherDao.upsert(new CurrentWeather(new CoordCurrentWeather(11212, 12314),new WeatherCurrentWeather(1, "sv", "VDSV", "zv"),
+//                    new MainCurrentWeather(1, 2, 3),
+//                    new WindCurrentWeather(1, 2),
+//                    new CloudsCurrentWeather(1),1231, "aaa", 45));
             return null;
         }
     }

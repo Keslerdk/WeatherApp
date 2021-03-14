@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.setting.favourite;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
@@ -35,7 +36,7 @@ public class FavouriteWeatherFragment extends Fragment {
     private FavouriteRecyclerAdapter favAdapter;
     private RecyclerView.LayoutManager favLayoutManager;
 
-    private ImageView nullFav;
+    private ConstraintLayout nullFav;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

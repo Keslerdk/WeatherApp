@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.weather.current;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.db.entity.favourites.Favourites;
+import com.example.weatherapp.ui.dialogs.MapDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,9 +48,13 @@ public class CurrentWeatherFragment extends Fragment {
     private TextView windCur;
     private ImageView starCur;
     private ImageView iconCur;
-    private ImageView nullCur;
+    private ConstraintLayout nullCur;
+    private Button mapBtn;
 
     private boolean isFavourite = false;
+    float lat;
+    float lon;
+    String cityVal;
     Favourites currentItem;
     List<Favourites> favouritesMain;
 
@@ -66,6 +73,7 @@ public class CurrentWeatherFragment extends Fragment {
         starCur = view.findViewById(R.id.starCur);
         iconCur = view.findViewById(R.id.curWeatherIcon);
         nullCur = view.findViewById(R.id.nullCur);
+        mapBtn = view.findViewById(R.id.mapBtn);
         return view;
     }
 
@@ -92,6 +100,10 @@ public class CurrentWeatherFragment extends Fragment {
                             currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
                             currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
                     currentItem.setId(currentWeather.getIdCity());
+
+                    lat =  currentWeather.getCoordCurrentWeather().getLat();
+                    lon =  currentWeather.getCoordCurrentWeather().getLon();
+                    cityVal=currentWeather.getName();
 
                     Date date = new Date(currentWeather.getDt() * 1000L);
                     SimpleDateFormat f = new SimpleDateFormat("EEEE, HH:mm");
@@ -128,6 +140,17 @@ public class CurrentWeatherFragment extends Fragment {
                     mViewModel.delete(favouritesMain.get(favouritesMain.size() - 1));
                 }
 
+            }
+        });
+
+        //кнопка для перехода на карты
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //создание всплывающего окна
+                Log.d("on click", String.valueOf(lat));
+                MapDialog exampleDialog = new MapDialog(lat, lon, cityVal);
+                exampleDialog.show(getFragmentManager(), "example dialog");
             }
         });
 

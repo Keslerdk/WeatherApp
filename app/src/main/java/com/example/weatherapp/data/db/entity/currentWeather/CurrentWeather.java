@@ -43,6 +43,10 @@ public class CurrentWeather {
         this.dt=dt;
     }
 
+    public CoordCurrentWeather getCoordCurrentWeather() {
+        return coordCurrentWeather;
+    }
+
     public WeatherCurrentWeather getWeather() {
         return weather;
     }
