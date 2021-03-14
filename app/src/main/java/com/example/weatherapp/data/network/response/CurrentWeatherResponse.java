@@ -19,7 +19,6 @@ public class CurrentWeatherResponse {
 
     int id;
     String name;
-    int code;
     int dt;
 
     public CoordCurrentWeather getCoord() {
@@ -50,11 +49,8 @@ public class CurrentWeatherResponse {
         return name;
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public int getDt() {
         return dt;
     }
+
 }
