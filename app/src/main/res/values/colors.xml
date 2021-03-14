@@ -11,6 +11,7 @@
     <color name="colorPrimary">#344955</color>
     <color name="colorPrimaryDark">#232F34</color>
     <color name="colorAccent">#F9AA33</color>
+    <color name="colorAccent2">#EC6E4C</color>
     <color name="textColorPrimary"> #4A5672</color>
     <color name="toolbarIconColor">#FFFFFF</color>
     <color name="loginPageBackgroundColor">#FFFFFF</color>

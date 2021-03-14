@@ -15,7 +15,8 @@
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent2</item>
+<!--        <item name="colorOnSurface">@color/colorAccent2</item>-->
 <!--        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
         <item name="android:textColorPrimary"> @color/textColorPrimary</item>
 
@@ -27,14 +28,47 @@
     </style>
 
     <style name="Widget.Shrine.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">?attr/colorAccent</item>
+        <item name="android:background">@color/textColorPrimary</item>
         <item name="android:theme">?theme</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="titleTextAppearance">@style/TextAppearance.Shrine.Toolbar</item>
     </style>
 
 
-<!--    text styles-->
+    <style name="Theme.App.NavigationBottom" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/toolbarIconColor</item>
+        <item name="colorOnPrimary">@color/textColorPrimary</item>
+    </style>
+
+
+    <style name="Widget.Shrine.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:paddingBottom">8dp</item>
+        <item name="boxStrokeColor">@color/colorAccent2</item>
+        <item name="android:textColorHint">@color/colorAccent2</item>
+        <item name="hintTextColor">@color/colorAccent2</item>
+
+    </style>
+
+
+    <style name="Widget.Shrine.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/toolbarIconColor</item>
+        <item name="backgroundTint">@color/colorAccent2</item>
+    </style>
+
+    <style name="Widget.Shrine.Button.TextButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/colorAccent2</item>
+        <item name="strokeColor">@color/colorAccent2</item>
+    </style>
+
+    <!--    text styles-->
 
 <!--    <style name="TextStyleCurrentWeather" parent="TextAppearance.AppCompat">-->
 <!--        <item name="android:textSize">18dp</item>-->
