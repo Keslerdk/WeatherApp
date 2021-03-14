@@ -3,22 +3,56 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-
-
+    >
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="0dp">
         <RadioButton
             android:id="@+id/radioBtnGoogle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Google Maps"/>
+            android:layout_height="match_parent"
+            android:text="Google Maps"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"/>
         <RadioButton
             android:id="@+id/radioBtnYandex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Yandex Maps"/>
+            android:textColor="@color/colorPrimary"
+            android:text="Yandex Maps"
+            android:textSize="20dp"/>
     </RadioGroup>
+
+    <Button
+        android:id="@+id/nextBtn"
+        style="@style/Widget.Shrine.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignEnd="@+id/radioGroup"
+        android:layout_alignRight="@+id/radioGroup"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="8dp"
+        android:text="Далее" />
+
+    <Button
+        android:id="@+id/cancelBtn"
+        style="@style/Widget.Shrine.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignStart="@+id/radioGroup"
+        android:layout_alignLeft="@+id/radioGroup"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Назад" />
 </RelativeLayout>
