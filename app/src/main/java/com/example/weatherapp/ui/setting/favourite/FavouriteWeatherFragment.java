@@ -11,9 +11,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.favourites.Favourites;
@@ -33,10 +35,13 @@ public class FavouriteWeatherFragment extends Fragment {
     private FavouriteRecyclerAdapter favAdapter;
     private RecyclerView.LayoutManager favLayoutManager;
 
+    private ImageView nullFav;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favourite_weather_fragment, container, false);
+        nullFav = view.findViewById(R.id.nullFav);
         return view;
     }
 
@@ -64,10 +69,11 @@ public class FavouriteWeatherFragment extends Fragment {
                 favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
                     @Override
                     public void onDeleteClick(int position) {
-                        mViewModel.delete(favourites.get(position));
                         favAdapter.notifyItemRemoved(position);
+                        mViewModel.delete(favourites.get(position));
                     }
                 });
+                if (favourites == null || favourites.isEmpty()) nullFav.setVisibility(View.VISIBLE);
             }
         });
 

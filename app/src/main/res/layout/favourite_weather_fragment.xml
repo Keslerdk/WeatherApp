@@ -11,5 +11,12 @@
         android:layout_height="match_parent"
         android:background="#CECECE"
         android:scrollbars="vertical"/>
+    <ImageView
+        android:id="@+id/nullFav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_e1"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
 
 </FrameLayout>

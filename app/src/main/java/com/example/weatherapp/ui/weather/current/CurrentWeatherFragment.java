@@ -45,6 +45,7 @@ public class CurrentWeatherFragment extends Fragment {
     private TextView windCur;
     private ImageView starCur;
     private ImageView iconCur;
+    private ImageView nullCur;
 
     private boolean isFavourite = false;
     Favourites currentItem;
@@ -64,6 +65,7 @@ public class CurrentWeatherFragment extends Fragment {
         windCur = view.findViewById(R.id.windCur);
         starCur = view.findViewById(R.id.starCur);
         iconCur = view.findViewById(R.id.curWeatherIcon);
+        nullCur = view.findViewById(R.id.nullCur);
         return view;
     }
 
@@ -84,27 +86,31 @@ public class CurrentWeatherFragment extends Fragment {
         mViewModel.getCurrentWeather().observe(getViewLifecycleOwner(), new Observer<CurrentWeather>() {
             @Override
             public void onChanged(CurrentWeather currentWeather) {
-                int icon = getImageid(getContext(),"w"+ currentWeather.getWeather().getIcon());
-                currentItem = new Favourites( icon,currentWeather.getName(), currentWeather.getWeather().getDescription(),
-                        currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
-                        currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
-                currentItem.setId(currentWeather.getIdCity());
+                if (currentWeather != null) {
+                    int icon = getImageid(getContext(), "w" + currentWeather.getWeather().getIcon());
+                    currentItem = new Favourites(icon, currentWeather.getName(), currentWeather.getWeather().getDescription(),
+                            currentWeather.getMain().getFeels_like(), currentWeather.getMain().getTemp(),
+                            currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
+                    currentItem.setId(currentWeather.getIdCity());
 
-                Date date =  new Date(currentWeather.getDt()*1000L);
-                SimpleDateFormat f = new SimpleDateFormat("EEEE, HH:mm");
-                f.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+                    Date date = new Date(currentWeather.getDt() * 1000L);
+                    SimpleDateFormat f = new SimpleDateFormat("EEEE, HH:mm");
+                    f.setTimeZone(TimeZone.getTimeZone("GMT+3"));
 
-                cityName.setText(currentWeather.getName());
-                dataCur.setText(f.format(date));
-                tempCur.setText(String.valueOf(((int) (currentWeather.getMain().getTemp()*10))/10.0)+"°C");
-                feels_likeCur.setText(String.valueOf(((int) (currentWeather.getMain().getFeels_like()*10))/10.0)+"°C");
-                descriptionCur.setText(currentWeather.getWeather().getDescription());
-                humidityCur.setText(String.valueOf((int)(currentWeather.getMain().getHumidity()))+"%");
-                windCur.setText(String.valueOf((int) currentWeather.getWind().getSpeed())+" км/ч");
-                iconCur.setImageResource(getImageid(getContext(),"w"+ currentWeather.
-                        getWeather().getIcon()));
-                //TODO: скачать ночные картинки
-                Toast.makeText(getContext(), String.valueOf(currentWeather.isFavourite()), Toast.LENGTH_SHORT).show();
+                    cityName.setText(currentWeather.getName());
+                    dataCur.setText(f.format(date));
+                    tempCur.setText(String.valueOf(((int) (currentWeather.getMain().getTemp() * 10)) / 10.0) + "°C");
+                    feels_likeCur.setText(String.valueOf(((int) (currentWeather.getMain().getFeels_like() * 10)) / 10.0) + "°C");
+                    descriptionCur.setText(currentWeather.getWeather().getDescription());
+                    humidityCur.setText(String.valueOf((int) (currentWeather.getMain().getHumidity())) + "%");
+                    windCur.setText(String.valueOf((int) currentWeather.getWind().getSpeed()) + " км/ч");
+                    iconCur.setImageResource(getImageid(getContext(), "w" + currentWeather.
+                            getWeather().getIcon()));
+                    //TODO: скачать ночные картинки
+                    Toast.makeText(getContext(), String.valueOf(currentWeather.isFavourite()), Toast.LENGTH_SHORT).show();
+                } else {
+                    nullCur.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -112,14 +118,14 @@ public class CurrentWeatherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!isFavourite) {
-                    isFavourite=true;
+                    isFavourite = true;
                     starCur.setImageResource(R.drawable.ic_star_yellow);
                     mViewModel.insert(currentItem);
                     //TODO: отображение желтой звездочки через isFavourite()
                 } else {
-                    isFavourite=false;
+                    isFavourite = false;
                     starCur.setImageResource(R.drawable.ic_favourite);
-                    mViewModel.delete(favouritesMain.get(favouritesMain.size()-1));
+                    mViewModel.delete(favouritesMain.get(favouritesMain.size() - 1));
                 }
 
             }
@@ -128,7 +134,7 @@ public class CurrentWeatherFragment extends Fragment {
     }
 
     public static int getImageid(Context context, String imageName) {
-        return context.getResources().getIdentifier("drawable/"+imageName, null,
+        return context.getResources().getIdentifier("drawable/" + imageName, null,
                 context.getPackageName());
     }
 }
