@@ -25,4 +25,5 @@ public interface FavouritesDao {
 
     @Query("select * from favourites_table")
     LiveData<List<Favourites>> getFavourites();
+
 }

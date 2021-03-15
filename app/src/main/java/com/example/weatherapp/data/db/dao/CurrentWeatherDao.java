@@ -6,6 +6,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 @Dao
 public interface CurrentWeatherDao {
@@ -15,4 +16,8 @@ public interface CurrentWeatherDao {
 
     @Query("select * from current_weather where id = 0")
     LiveData<CurrentWeather> getCurrentWeather();
+
+    @Query("UPDATE current_weather set isFavourite = :isfavourite ")
+    void updateIsFavourite(boolean isfavourite);
+
 }

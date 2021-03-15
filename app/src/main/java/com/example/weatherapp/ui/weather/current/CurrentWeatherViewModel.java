@@ -16,6 +16,7 @@ public class CurrentWeatherViewModel extends AndroidViewModel {
     public ForecastRepo forecastRepo;
 
     public LiveData<CurrentWeather> currentWeatherLiveData;
+
     public LiveData<List<Favourites>> favouritesLiveData;
 
     public CurrentWeatherViewModel (@NonNull Application application) {
@@ -27,6 +28,7 @@ public class CurrentWeatherViewModel extends AndroidViewModel {
     public void upsert(CurrentWeather currentWeather) {
         forecastRepo.upsert(currentWeather);
     }
+    public void updateIsFavourite(boolean isfavourite) {forecastRepo.updateIsFavourite(isfavourite);}
 
     public void insert(Favourites favourites) {
         forecastRepo.insert(favourites);

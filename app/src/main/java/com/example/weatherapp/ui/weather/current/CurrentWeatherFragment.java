@@ -58,6 +58,8 @@ public class CurrentWeatherFragment extends Fragment {
     Favourites currentItem;
     List<Favourites> favouritesMain;
 
+    int idCity;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -105,6 +107,8 @@ public class CurrentWeatherFragment extends Fragment {
                     lon =  currentWeather.getCoordCurrentWeather().getLon();
                     cityVal=currentWeather.getName();
 
+                    idCity = currentWeather.getIdCity();
+
                     Date date = new Date(currentWeather.getDt() * 1000L);
                     SimpleDateFormat f = new SimpleDateFormat("EEEE, HH:mm");
                     f.setTimeZone(TimeZone.getTimeZone("GMT+3"));
@@ -120,6 +124,8 @@ public class CurrentWeatherFragment extends Fragment {
                             getWeather().getIcon()));
                     //TODO: скачать ночные картинки
                     Toast.makeText(getContext(), String.valueOf(currentWeather.isFavourite()), Toast.LENGTH_SHORT).show();
+                    if (currentWeather.isFavourite()) starCur.setImageResource(R.drawable.ic_star_yellow);
+                    else starCur.setImageResource(R.drawable.ic_favourite);
                 } else {
                     nullCur.setVisibility(View.VISIBLE);
                 }
@@ -131,12 +137,12 @@ public class CurrentWeatherFragment extends Fragment {
             public void onClick(View v) {
                 if (!isFavourite) {
                     isFavourite = true;
-                    starCur.setImageResource(R.drawable.ic_star_yellow);
+                    mViewModel.updateIsFavourite(true);
                     mViewModel.insert(currentItem);
                     //TODO: отображение желтой звездочки через isFavourite()
                 } else {
                     isFavourite = false;
-                    starCur.setImageResource(R.drawable.ic_favourite);
+                    mViewModel.updateIsFavourite(false);
                     mViewModel.delete(favouritesMain.get(favouritesMain.size() - 1));
                 }
 

@@ -72,6 +72,8 @@ public class FavouriteWeatherFragment extends Fragment {
                     public void onDeleteClick(int position) {
                         favAdapter.notifyItemRemoved(position);
                         mViewModel.delete(favourites.get(position));
+                        //поменять звездочку в текущей погоде.
+                        mViewModel.updateIsFavourite(false);
                     }
                 });
                 if (favourites == null || favourites.isEmpty()) nullFav.setVisibility(View.VISIBLE);

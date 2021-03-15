@@ -53,8 +53,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     //room
-    implementation "android.arch.persistence.room:runtime:1.0.0"
-    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    implementation "android.arch.persistence.room:runtime:2.2.0"
+    annotationProcessor "android.arch.persistence.room:compiler:2.2.0"
 
     //google maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'

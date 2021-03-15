@@ -23,6 +23,7 @@ public class ForecastRepo {
 
     private FavouritesDao favouritesDao;
     private LiveData<List<Favourites>> favouritesLiveData;
+    private Favourites itemFav;
 
     public ForecastRepo(Application application) {
         ForecastDatabase forecastDatabase = ForecastDatabase.getDatabase(application);
@@ -34,11 +35,15 @@ public class ForecastRepo {
 
         favouritesDao = forecastDatabase.favouritesDao();
         favouritesLiveData = favouritesDao.getFavourites();
+
     }
 
     //current weather
     public void upsert(CurrentWeather currentWeather) {
         new UpsertAsyncTask(currentWeatherDao).execute(currentWeather);
+    }
+    public void updateIsFavourite(boolean isfavourite) {
+        new UpdateIsFavouriteAsyncTask(currentWeatherDao).execute(isfavourite);
     }
 
     //forecast 7 days
@@ -58,6 +63,7 @@ public class ForecastRepo {
     public void delete(Favourites favourites) {
          new DeleteAsyncTaskRavourites(favouritesDao).execute(favourites);
     }
+
 
     public LiveData<CurrentWeather> getCurrentWeather() {
         return weatherLiveData;
@@ -137,6 +143,20 @@ public class ForecastRepo {
         @Override
         protected Void doInBackground(Favourites... favourites) {
             favouritesDao.delete(favourites[0]);
+            return null;
+        }
+    }
+
+    private class UpdateIsFavouriteAsyncTask extends  AsyncTask<Boolean, Void, Void> {
+        public CurrentWeatherDao currentWeatherDao;
+
+        public UpdateIsFavouriteAsyncTask(CurrentWeatherDao currentWeatherDao) {
+            this.currentWeatherDao = currentWeatherDao;
+        }
+
+        @Override
+        protected Void doInBackground(Boolean... booleans) {
+            currentWeatherDao.updateIsFavourite(booleans[0]);
             return null;
         }
     }
