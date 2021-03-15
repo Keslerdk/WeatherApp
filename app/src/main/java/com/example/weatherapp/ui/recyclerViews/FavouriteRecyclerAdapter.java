@@ -21,7 +21,10 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
     List<Favourites> favouriteItemList;
     private OnItemClickListener mListener;
 
+
+
     public interface OnItemClickListener {
+        void onItemClick(int position);
         void onDeleteClick(int position);
     }
 
@@ -100,6 +103,18 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
                         expandableMenu.setImageResource(R.drawable.ic_expand_more);
                         favouriteItem.setExpended(true);
                         notifyItemChanged(getAdapterPosition());
+                    }
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
                     }
                 }
             });
