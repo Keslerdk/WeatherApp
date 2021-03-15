@@ -56,9 +56,6 @@ public class CurrentWeatherFragment extends Fragment {
     float lon;
     String cityVal;
     Favourites currentItem;
-    List<Favourites> favouritesMain;
-
-    int idCity;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -86,13 +83,6 @@ public class CurrentWeatherFragment extends Fragment {
 //        mViewModel = new ViewModelProvider(this).get(CurrentWeatherViewModel.class);
         // TODO: Use the ViewModel
 
-        mViewModel.getFavourites().observe(getViewLifecycleOwner(), new Observer<List<Favourites>>() {
-            @Override
-            public void onChanged(List<Favourites> favourites) {
-                favouritesMain = favourites;
-            }
-        });
-
         mViewModel.getCurrentWeather().observe(getViewLifecycleOwner(), new Observer<CurrentWeather>() {
             @Override
             public void onChanged(CurrentWeather currentWeather) {
@@ -106,8 +96,6 @@ public class CurrentWeatherFragment extends Fragment {
                     lat =  currentWeather.getCoordCurrentWeather().getLat();
                     lon =  currentWeather.getCoordCurrentWeather().getLon();
                     cityVal=currentWeather.getName();
-
-                    idCity = currentWeather.getIdCity();
 
                     Date date = new Date(currentWeather.getDt() * 1000L);
                     SimpleDateFormat f = new SimpleDateFormat("EEEE, HH:mm");
@@ -139,11 +127,10 @@ public class CurrentWeatherFragment extends Fragment {
                     isFavourite = true;
                     mViewModel.updateIsFavourite(true);
                     mViewModel.insert(currentItem);
-                    //TODO: отображение желтой звездочки через isFavourite()
                 } else {
                     isFavourite = false;
                     mViewModel.updateIsFavourite(false);
-                    mViewModel.delete(favouritesMain.get(favouritesMain.size() - 1));
+                    mViewModel.delete(currentItem);
                 }
 
             }
