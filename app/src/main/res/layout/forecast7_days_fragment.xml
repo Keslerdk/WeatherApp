@@ -15,7 +15,7 @@
         android:paddingTop="8dp"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nullForecast"
-        android:background="#ffff"
+        android:background="#CECECE"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible">

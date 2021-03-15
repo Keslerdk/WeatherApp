@@ -14,7 +14,7 @@
         android:scrollbars="vertical"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nullFav"
-        android:background="#ffff"
+        android:background="#CECECE"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible">
