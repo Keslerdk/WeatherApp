@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import android.os.Handler;
 import android.util.Log;
@@ -131,6 +132,7 @@ public class SearchWeatherFragment extends Fragment {
                             showSnackBar("Что-то пошло не так. Попробуйте снова.");
                             break;
                     }
+                    Navigation.findNavController(getView()).navigate(R.id.currentWeatherFragment);
                 }
 
                 @Override

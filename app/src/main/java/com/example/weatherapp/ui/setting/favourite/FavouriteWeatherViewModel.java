@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.ForecastRepo;
+import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.db.entity.favourites.Favourites;
+import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 
 import java.util.List;
 
@@ -34,6 +36,11 @@ public class FavouriteWeatherViewModel extends AndroidViewModel {
     }
     //current weather
     public void updateIsFavourite(boolean isfavourite) {forecastRepo.updateIsFavourite(isfavourite);}
+    public void upsert(CurrentWeather currentWeather){forecastRepo.upsert(currentWeather);}
+
+    //forecast
+    public void upsert(Forecast7Days forecast7Days) {forecastRepo.upsert(forecast7Days);}
+
 
     public LiveData<List<Favourites>> getFavourites() {
         return  favouritesLiveData;

@@ -110,8 +110,6 @@ public class CurrentWeatherFragment extends Fragment {
                     windCur.setText(String.valueOf((int) currentWeather.getWind().getSpeed()) + " км/ч");
                     iconCur.setImageResource(getImageid(getContext(), "w" + currentWeather.
                             getWeather().getIcon()));
-                    //TODO: скачать ночные картинки
-                    Toast.makeText(getContext(), String.valueOf(currentWeather.isFavourite()), Toast.LENGTH_SHORT).show();
                     if (currentWeather.isFavourite()) starCur.setImageResource(R.drawable.ic_star_yellow);
                     else starCur.setImageResource(R.drawable.ic_favourite);
                 } else {
