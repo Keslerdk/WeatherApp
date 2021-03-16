@@ -53,9 +53,6 @@ public class FavouriteWeatherFragment extends Fragment {
 
     private ConstraintLayout nullFav;
 
-    float lat;
-    float lon;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -91,15 +88,6 @@ public class FavouriteWeatherFragment extends Fragment {
                     public void onItemClick(int position) {
                         ApiCalls apiCalls = new ApiCalls(getContext(), getView(), mViewModel);
                         apiCalls.getWeather(favourites.get(position).getNameCity());
-//                        firstApiCall(favourites.get(position).getNameCity());
-//
-//                        final Handler handler = new Handler();
-//                        handler.postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                secondApiCall();
-//                            }
-//                        }, 5000);
                     }
 
                     @Override
@@ -114,81 +102,4 @@ public class FavouriteWeatherFragment extends Fragment {
             }
         });
     }
-
-    private void showSnackBar(String text) {
-        Snackbar snack = Snackbar.make(getView(), text, Snackbar.LENGTH_LONG);
-        View view = snack.getView();
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-        params.gravity = Gravity.TOP;
-        view.setLayoutParams(params);
-        snack.show();
-    }
-
-    private void firstApiCall(String cityName) {
-        //асинхронный запрос на текущую погоду
-        WeatherApiRequest jsonPlaceHolderApi = WeatherApiRequest.invoke();
-        if (WeatherApiRequest.isOnline(getContext())) {
-
-            Call<CurrentWeatherResponse> callCurrentWeather = jsonPlaceHolderApi.getCurrentWeather(cityName, "ru", "metric");
-            callCurrentWeather.enqueue(new Callback<CurrentWeatherResponse>() {
-                @Override
-                public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
-                    CurrentWeatherResponse val = response.body();
-                    switch (response.code()) {
-                        case (200):
-                            //обновляем базу
-                            mViewModel.upsert(new CurrentWeather(val.getCoord(), val.getWeather().get(0), val.getMain(),
-                                    val.getWind(), val.getClouds(), val.getDt(), val.getName(), val.getId()));
-                            //координаты для следующего запроса
-                            lat = val.getCoord().getLat();
-                            lon = val.getCoord().getLon();
-                            break;
-                        case (404):
-                            showSnackBar("Не найдено");
-                            break;
-                        default:
-                            showSnackBar("Что-то пошло не так. Попробуйте снова.");
-                            break;
-                    }
-
-                    Navigation.findNavController(getView()).navigate(R.id.currentWeatherFragment);
-                }
-
-                @Override
-                public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
-                    showSnackBar("Что-то пошло не так. Попробуйте снова");
-                    Log.e("InResponse", "exeption", t);
-                }
-            });
-
-        } else showSnackBar("Нет интернет соединения");
-    }
-
-    private void secondApiCall() {
-        WeatherApiRequest jsonPlaceHolderApi = WeatherApiRequest.invoke();
-        if (WeatherApiRequest.isOnline(getContext())) {
-            if (lat != 2 || lon != 2) {
-                // асинхронный запрос на прогноз
-                Call<Forecast7DaysResponse> callForecast = jsonPlaceHolderApi.get7DaysForecast(lat, lon, "hourly", "ru", "metric");
-                callForecast.enqueue(new Callback<Forecast7DaysResponse>() {
-                    @Override
-                    public void onResponse(Call<Forecast7DaysResponse> call, Response<Forecast7DaysResponse> response) {
-                        //обновляем в базу
-                        Forecast7DaysResponse val = response.body();
-                        if (response.code() == 200)
-                            mViewModel.upsert(new Forecast7Days(val.getDaily()));
-                    }
-
-                    @Override
-                    public void onFailure(Call<Forecast7DaysResponse> call, Throwable t) {
-                        showSnackBar("Что-то пошло не так. Попробуйте снова");
-                    }
-                });
-            }
-
-        } else showSnackBar("Нет интернет соединения");
-    }
-
-
-
 }

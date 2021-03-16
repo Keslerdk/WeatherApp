@@ -110,6 +110,15 @@ public class CurrentWeatherFragment extends Fragment {
                     windCur.setText(String.valueOf((int) currentWeather.getWind().getSpeed()) + " км/ч");
                     iconCur.setImageResource(getImageid(getContext(), "w" + currentWeather.
                             getWeather().getIcon()));
+
+                    mViewModel.getFavourites().observe(getViewLifecycleOwner(), new Observer<List<Favourites>>() {
+                        @Override
+                        public void onChanged(List<Favourites> favourites) {
+                            Log.d("Search for favourite", String.valueOf(favourites.indexOf(currentItem)));
+                        }
+                    });
+
+
                     if (currentWeather.isFavourite()) starCur.setImageResource(R.drawable.ic_star_yellow);
                     else starCur.setImageResource(R.drawable.ic_favourite);
                 } else {

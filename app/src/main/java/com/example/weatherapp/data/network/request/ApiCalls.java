@@ -108,12 +108,12 @@ public class ApiCalls {
                     public void onResponse(Call<Forecast7DaysResponse> call, Response<Forecast7DaysResponse> response) {
                         //обновляем в базу
                         Forecast7DaysResponse val = response.body();
-                        if (response.code() == 200)
+                        if (response.code() == 200) {
                             if (mViewModelFav!=null) upsertViewModelForecast(mViewModelFav, new Forecast7Days(val.getDaily()));
                             else upsertViewModelForecast(mViewModelSearch, new Forecast7Days(val.getDaily()));
 
 //                            mViewModel.upsert(new Forecast7Days(val.getDaily()));
-                        Navigation.findNavController(view).navigate(R.id.currentWeatherFragment);
+                        Navigation.findNavController(view).navigate(R.id.currentWeatherFragment);}
                     }
 
                     @Override
