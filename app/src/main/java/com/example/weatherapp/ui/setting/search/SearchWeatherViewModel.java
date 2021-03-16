@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.weatherapp.data.db.ForecastRepo;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
+import com.example.weatherapp.data.db.entity.favourites.Favourites;
 import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 
 public class SearchWeatherViewModel extends AndroidViewModel {

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,6 +58,8 @@ public class CurrentWeatherFragment extends Fragment {
     String cityVal;
     Favourites currentItem;
 
+    int cityId;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -93,9 +96,10 @@ public class CurrentWeatherFragment extends Fragment {
                             currentWeather.getWind().getSpeed(), currentWeather.getMain().getHumidity());
                     currentItem.setId(currentWeather.getIdCity());
 
-                    lat =  currentWeather.getCoordCurrentWeather().getLat();
-                    lon =  currentWeather.getCoordCurrentWeather().getLon();
-                    cityVal=currentWeather.getName();
+                    lat = currentWeather.getCoordCurrentWeather().getLat();
+                    lon = currentWeather.getCoordCurrentWeather().getLon();
+                    cityId = currentWeather.getIdCity();
+                    cityVal = currentWeather.getName();
 
                     Date date = new Date(currentWeather.getDt() * 1000L);
                     SimpleDateFormat f = new SimpleDateFormat("EEEE, HH:mm");
@@ -111,21 +115,34 @@ public class CurrentWeatherFragment extends Fragment {
                     iconCur.setImageResource(getImageid(getContext(), "w" + currentWeather.
                             getWeather().getIcon()));
 
-                    mViewModel.getFavourites().observe(getViewLifecycleOwner(), new Observer<List<Favourites>>() {
-                        @Override
-                        public void onChanged(List<Favourites> favourites) {
-                            Log.d("Search for favourite", String.valueOf(favourites.indexOf(currentItem)));
-                        }
-                    });
-
-
-                    if (currentWeather.isFavourite()) starCur.setImageResource(R.drawable.ic_star_yellow);
+                    if (currentWeather.isFavourite())
+                        starCur.setImageResource(R.drawable.ic_star_yellow);
                     else starCur.setImageResource(R.drawable.ic_favourite);
                 } else {
                     nullCur.setVisibility(View.VISIBLE);
                 }
             }
         });
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                Log.d("cityId", String.valueOf(cityId));
+                mViewModel.getItemFav(cityId).observe(getViewLifecycleOwner(), new Observer<Favourites>() {
+                    @Override
+                    public void onChanged(Favourites favourites) {
+                        if (favourites != null) {
+                            Log.d("Search for favourite", String.valueOf(favourites.getNameCity()));
+                            mViewModel.updateIsFavourite(true);
+                        }
+                    }
+                });
+            }
+        }, 10);
+
+
 
         starCur.setOnClickListener(new View.OnClickListener() {
             @Override

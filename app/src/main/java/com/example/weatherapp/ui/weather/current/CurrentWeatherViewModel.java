@@ -42,4 +42,6 @@ public class CurrentWeatherViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Favourites>> getFavourites() {return favouritesLiveData;}
+
+    public LiveData<Favourites> getItemFav(int cityId) {return forecastRepo.getItemFav(cityId);}
 }

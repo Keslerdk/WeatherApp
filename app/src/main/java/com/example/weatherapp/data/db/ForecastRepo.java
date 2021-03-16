@@ -75,6 +75,10 @@ public class ForecastRepo {
         return favouritesLiveData;
     }
 
+    public LiveData<Favourites> getItemFav(int cityId) {
+        return favouritesDao.getFavItem(cityId);
+    }
+
     private class UpsertAsyncTask extends AsyncTask<CurrentWeather, Void, Void> {
 
         private CurrentWeatherDao currentWeatherDao;

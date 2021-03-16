@@ -26,4 +26,7 @@ public interface FavouritesDao {
     @Query("select * from favourites_table")
     LiveData<List<Favourites>> getFavourites();
 
+    @Query("select * from favourites_table where id = :cityId")
+    LiveData<Favourites> getFavItem(int cityId);
+
 }
