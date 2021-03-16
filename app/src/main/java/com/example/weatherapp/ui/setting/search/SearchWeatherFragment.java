@@ -23,6 +23,7 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.data.network.WeatherApiRequest;
+import com.example.weatherapp.data.network.request.ApiCalls;
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 import com.example.weatherapp.data.network.response.Forecast7DaysResponse;
 import com.example.weatherapp.ui.dialogs.MapDialog;
@@ -82,15 +83,18 @@ public class SearchWeatherFragment extends Fragment {
                 } else {
                     cityInput.setErrorEnabled(false);
 
-                    firstApiCall(cityName);
-                    //задержка чтобы вопсользовать координатами из прошлого запроса
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            secondApiCall();
-                        }
-                    }, 5000);
+                    ApiCalls apiCalls = new ApiCalls(getContext(), getView(), mViewModel);
+                    apiCalls.getWeather(cityName);
+
+//                    firstApiCall(cityName);
+//                    //задержка чтобы вопсользовать координатами из прошлого запроса
+//                    final Handler handler = new Handler();
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            secondApiCall();
+//                        }
+//                    }, 5000);
                 }
             }
         });

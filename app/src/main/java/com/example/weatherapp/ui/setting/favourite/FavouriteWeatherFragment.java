@@ -27,6 +27,7 @@ import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
 import com.example.weatherapp.data.db.entity.favourites.Favourites;
 import com.example.weatherapp.data.db.entity.forecast7Days.Forecast7Days;
 import com.example.weatherapp.data.network.WeatherApiRequest;
+import com.example.weatherapp.data.network.request.ApiCalls;
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse;
 import com.example.weatherapp.data.network.response.Forecast7DaysResponse;
 import com.example.weatherapp.ui.recyclerViews.FavouriteRecyclerAdapter;
@@ -59,6 +60,7 @@ public class FavouriteWeatherFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favourite_weather_fragment, container, false);
+
         nullFav = view.findViewById(R.id.nullFav);
         return view;
     }
@@ -87,15 +89,17 @@ public class FavouriteWeatherFragment extends Fragment {
                 favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        firstApiCall(favourites.get(position).getNameCity());
-
-                        final Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                secondApiCall();
-                            }
-                        }, 5000);
+                        ApiCalls apiCalls = new ApiCalls(getContext(), getView(), mViewModel);
+                        apiCalls.getWeather(favourites.get(position).getNameCity());
+//                        firstApiCall(favourites.get(position).getNameCity());
+//
+//                        final Handler handler = new Handler();
+//                        handler.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                secondApiCall();
+//                            }
+//                        }, 5000);
                     }
 
                     @Override
