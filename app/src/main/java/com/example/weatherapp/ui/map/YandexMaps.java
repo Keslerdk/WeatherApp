@@ -25,6 +25,11 @@ public class YandexMaps extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        MapKitFactory.setApiKey("36cbbd87-ea5a-4077-932f-132766bd23c3");
+        MapKitFactory.initialize(this);
+        setContentView(R.layout.activity_yandex_maps);
+
         super.onCreate(savedInstanceState);
 
         lat = getIntent().getFloatExtra("lat", 0);
@@ -32,20 +37,14 @@ public class YandexMaps extends AppCompatActivity {
         cityName = getIntent().getStringExtra("cityName");
 
 
-        MapKitFactory.setApiKey("799c7d30-e06a-4df6-89c7-950b9c262884");
-        MapKitFactory.initialize(this);
-
-        setContentView(R.layout.activity_yandex_maps);
-
         map = findViewById(R.id.yandexmapFrag);
 
-        MapObjectCollection mapObjectCollection = map.getMap().getMapObjects().addCollection();
 
         map.getMap().move(new CameraPosition(new Point(lat, lon), 11.0f, 0.0f, 0.0f),
                 new Animation(Animation.Type.SMOOTH, 0),
                 null);
         map.getMap().getMapObjects().addPlacemark(new Point(lat, lon)
-                , ImageProvider.fromResource(this, R.drawable.placemarket2));
+                , ImageProvider.fromResource(this, R.drawable.placemarker3));
 
 //        PlacemarkMapObject mark = mapObjectCollection.addPlacemark(new Point(55.751574, 37.573856));
 //        mark.setOpacity(0.5f);
