@@ -86,7 +86,7 @@ public class FavouriteWeatherFragment extends Fragment {
                 favAdapter.setOnItemClickListener(new FavouriteRecyclerAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        ApiCalls apiCalls = new ApiCalls(getContext(), getView(), mViewModel);
+                        ApiCalls apiCalls = new ApiCalls(getContext(), getView(), mViewModel, getActivity());
                         apiCalls.getWeather(favourites.get(position).getNameCity());
                     }
 

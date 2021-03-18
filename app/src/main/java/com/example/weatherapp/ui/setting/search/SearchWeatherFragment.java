@@ -81,7 +81,7 @@ public class SearchWeatherFragment extends Fragment {
                 } else {
                     cityInput.setErrorEnabled(false);
 
-                    ApiCalls apiCalls = new ApiCalls(getContext(), getView(), mViewModel);
+                    ApiCalls apiCalls = new ApiCalls(getContext(), getView(), mViewModel, getActivity());
                     apiCalls.getWeather(cityName);
 
                 }

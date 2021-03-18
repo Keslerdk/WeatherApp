@@ -1,13 +1,17 @@
 package com.example.weatherapp.data.network.request;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.db.entity.currentWeather.CurrentWeather;
@@ -30,19 +34,19 @@ public class ApiCalls {
     View view;
     SearchWeatherViewModel mViewModelSearch;
     FavouriteWeatherViewModel mViewModelFav;
-//    float lat;
-//    float lon;
-
-    public ApiCalls(Context context, View view, SearchWeatherViewModel mViewModel) {
+    Activity activity;
+    public ApiCalls(Context context, View view, SearchWeatherViewModel mViewModel, Activity activity) {
         this.context = context;
         this.view = view;
         this.mViewModelSearch = mViewModel;
+        this.activity = activity;
     }
 
-    public ApiCalls(Context context, View view, FavouriteWeatherViewModel mViewModelFav) {
+    public ApiCalls(Context context, View view, FavouriteWeatherViewModel mViewModelFav, Activity activity) {
         this.context = context;
         this.view = view;
         this.mViewModelFav = mViewModelFav;
+        this.activity = activity;
     }
 
     public void getWeather(String cityName) {
@@ -84,7 +88,6 @@ public class ApiCalls {
                             showSnackBar("Что-то пошло не так. Попробуйте снова.");
                             break;
                     }
-//                    Navigation.findNavController(view).navigate(R.id.currentWeatherFragment);
                 }
 
                 @Override
@@ -113,7 +116,10 @@ public class ApiCalls {
                             else upsertViewModelForecast(mViewModelSearch, new Forecast7Days(val.getDaily()));
 
 //                            mViewModel.upsert(new Forecast7Days(val.getDaily()));
-                        Navigation.findNavController(view).navigate(R.id.currentWeatherFragment);}
+
+//                        Navigation.findNavController(view).navigate(R.id.currentWeatherFragment);
+                            Navigation.findNavController(activity, R.id.nav_host_fragment).navigate(R.id.currentWeatherFragment);
+                        }
                     }
 
                     @Override
