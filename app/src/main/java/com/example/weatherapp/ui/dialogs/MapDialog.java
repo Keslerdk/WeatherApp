@@ -45,10 +45,7 @@ public class MapDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog alertDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-//        intent.putExtra("lat", lat);
-//        intent.putExtra("lon", lon);
-//        intent.putExtra("cityName", cityName);
+        
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
@@ -88,40 +85,8 @@ public class MapDialog extends AppCompatDialogFragment {
             }
         });
 
-        CharSequence[] values = {"Google Map", "Yandex Map"};
         builder.setView(view)
                 .setTitle("Выберите карту");
-//                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                })
-//                .setPositiveButton("next", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        if (intent!=null) startActivity(intent);
-//                        else Toast.makeText(getContext(), "Intent is null", Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .setSingleChoiceItems(values, 1, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Log.d("Dialog", String.valueOf(which));
-//                        if (which==0) {
-//                            intent = new Intent(getContext(), GoogleMaps.class);
-//                            intent.putExtra("lat", lat);
-//                            intent.putExtra("lon", lon);
-//                            intent.putExtra("cityName", cityName);
-//                        } else {
-//                            intent = new Intent(getContext(), YandexMaps.class);
-//                            intent.putExtra("lat", lat);
-//                            intent.putExtra("lon", lon);
-//                            intent.putExtra("cityName", cityName);
-//                        }
-//
-//                    }
-//                });
         alertDialog = builder.create();
         alertDialog.show();
         return alertDialog;
