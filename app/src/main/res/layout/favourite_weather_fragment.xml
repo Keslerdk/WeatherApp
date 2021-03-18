@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#CECECE"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:paddingTop="8dp"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nullFav"
         android:background="#CECECE"

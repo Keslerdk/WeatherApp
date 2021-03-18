@@ -1,214 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.weather.current.CurrentWeatherFragment"
-    android:background="#CECECE">
+    android:background="#CECECE"
+    tools:context=".ui.weather.current.CurrentWeatherFragment">
 
-    <androidx.cardview.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="12dp"
-        android:layout_gravity="center"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        >
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="16dp">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardCornerRadius="12dp"
+            android:scrollbars="vertical">
 
-            <TextView
-                android:id="@+id/cityName"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginTop="16dp"
-                android:text="Москва"
-                android:textAllCaps="true"
-                android:textColor="#344955"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/montserrat"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                >
 
-            <TextView
-                android:id="@+id/dataCur"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:text="Воскресенье   17:22"
-                style="@style/CurrentWeatherDescriptionStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cityName" />
+                <TextView
+                    android:id="@+id/cityName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Москва"
+                    android:textAllCaps="true"
+                    android:textColor="#344955"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/curWeatherIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="17dp"
-                android:background="#Ffff"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dataCur" />
+                <TextView
+                    android:id="@+id/dataCur"
+                    style="@style/CurrentWeatherDescriptionStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:text="Воскресенье   17:22"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cityName" />
 
-            <TextView
-                android:id="@+id/feelLikeCur"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="17dp"
-                android:text="-5°C"
-                style="@style/CurrentWeatherNumberStyle"
-                android:textSize="32dp"
-                android:textColor="#232F34"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/curWeatherIcon" />
+                <ImageView
+                    android:id="@+id/curWeatherIcon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="17dp"
+                    android:background="#Ffff"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dataCur" />
 
-            <TextView
-                android:id="@+id/descriptionCur"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:text="Небольшой снег"
-                android:textSize="18dp"
-                style="@style/CurrentWeatherDescriptionStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feelLikeCur" />
+                <TextView
+                    android:id="@+id/feelLikeCur"
+                    style="@style/CurrentWeatherNumberStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="17dp"
+                    android:text="-5°C"
+                    android:textColor="#232F34"
+                    android:textSize="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/curWeatherIcon" />
 
-
-            <TextView
-                android:id="@+id/textView1"
-                style="@style/CurrentWeatherItemStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="Температура"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
-
-            <TextView
-                android:id="@+id/textView3"
-                style="@style/CurrentWeatherItemStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Влажность"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginTop="16dp"
-                android:text="Ветер"
-                style="@style/CurrentWeatherItemStyle"
-                app:layout_constraintEnd_toEndOf="@+id/descriptionCur"
-                app:layout_constraintStart_toStartOf="@+id/descriptionCur"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
-
-            <TextView
-                android:id="@+id/tempCur"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:text="-1°C"
-                style="@style/CurrentWeatherNumberStyle"
-                app:layout_constraintEnd_toEndOf="@+id/textView1"
-                app:layout_constraintStart_toStartOf="@+id/textView1"
-                app:layout_constraintTop_toBottomOf="@+id/textView1" />
-
-            <TextView
-                android:id="@+id/windCur"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:text="20км/ч"
-                style="@style/CurrentWeatherNumberStyle"
-                app:layout_constraintEnd_toEndOf="@+id/textView4"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-            <TextView
-                android:id="@+id/humidityCur"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:text="24%"
-                style="@style/CurrentWeatherNumberStyle"
-                app:layout_constraintEnd_toEndOf="@+id/textView3"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-            <ImageView
-                android:id="@+id/starCur"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ic_favourite"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/mapBtn"
-                style="@style/Widget.Shrine.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="8dp"
-                android:text="Посмотреть на карте"
-                android:textSize="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/windCur" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/descriptionCur"
+                    style="@style/CurrentWeatherDescriptionStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:text="Небольшой снег"
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/feelLikeCur" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/nullCur"
-            android:visibility="invisible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffff">
+                <TextView
+                    android:id="@+id/textView1"
+                    style="@style/CurrentWeatherItemStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Температура"
+                    app:layout_constraintEnd_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="17dp"
-                android:text="Здесь пока ничего нет"
-                android:textSize="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/CurrentWeatherItemStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Влажность"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_current"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/CurrentWeatherItemStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Ветер"
+                    app:layout_constraintEnd_toEndOf="@+id/descriptionCur"
+                    app:layout_constraintStart_toStartOf="@+id/descriptionCur"
+                    app:layout_constraintTop_toBottomOf="@+id/descriptionCur" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Сделайте запрос"
-                android:textSize="18dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/tempCur"
+                    style="@style/CurrentWeatherNumberStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:text="-1°C"
+                    app:layout_constraintEnd_toEndOf="@+id/textView1"
+                    app:layout_constraintStart_toStartOf="@+id/textView1"
+                    app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+                <TextView
+                    android:id="@+id/windCur"
+                    style="@style/CurrentWeatherNumberStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:text="20км/ч"
+                    app:layout_constraintEnd_toEndOf="@+id/textView4"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <TextView
+                    android:id="@+id/humidityCur"
+                    style="@style/CurrentWeatherNumberStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:text="24%"
+                    app:layout_constraintEnd_toEndOf="@+id/textView3"
+                    app:layout_constraintStart_toStartOf="@+id/textView3"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <ImageView
+                    android:id="@+id/starCur"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_favourite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/mapBtn"
+                    style="@style/Widget.Shrine.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Посмотреть на карте"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/windCur" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nullCur"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffff"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="17dp"
+                    android:text="Здесь пока ничего нет"
+                    android:textSize="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/imageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_current"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Сделайте запрос"
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 </FrameLayout>

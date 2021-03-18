@@ -36,6 +36,7 @@ public class CurrentWeatherViewModel extends AndroidViewModel {
     public void delete(Favourites favourites) {
         forecastRepo.delete(favourites);
     }
+    public void update(Favourites favourites) {forecastRepo.update(favourites);}
 
     public LiveData<CurrentWeather> getCurrentWeather() {
         return currentWeatherLiveData;

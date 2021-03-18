@@ -23,7 +23,6 @@ public class ForecastRepo {
 
     private FavouritesDao favouritesDao;
     private LiveData<List<Favourites>> favouritesLiveData;
-    private Favourites itemFav;
 
     public ForecastRepo(Application application) {
         ForecastDatabase forecastDatabase = ForecastDatabase.getDatabase(application);
